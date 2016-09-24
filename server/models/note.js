@@ -3,7 +3,9 @@ var mongoose = require('mongoose');
 var NoteSchema = new mongoose.Schema({
 	name: String,
 	hashname: String,
-	location: Object,
+	address: String,
+	lat: Number,
+	long: Number,
 	note: String,
 	contact: String,
 	notes: [{message: String, contact: String, created_at: String}],

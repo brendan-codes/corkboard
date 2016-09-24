@@ -11,7 +11,9 @@ module.exports = function(app){
 	app.post('/notes/add', function(req, res){
 		Notes.add(req, res);
 	});
-	app.post('/find_by_location', Notes.find_by_location);
+	app.post('/find_by_location', function(req, res){
+		Notes.find_by_location(req, res);
+	});
 
 
 

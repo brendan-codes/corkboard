@@ -7,12 +7,19 @@
 
 	<h1>Test!!</h1>
 
+	adder <br>
 	<form action='/notes/add' method='POST'>
-		Name: <input type="text" name="name">
-		Lat: <input type="text" name="lat">
-		Long: <input type="text" name="long">
-		<input type="submit" value='add'>
+		Name: <input type="text" name="name"><br>
+		Lat: <input type="text" name="lat"><br>
+		Long: <input type="text" name="long"><br>
+		<input type="submit" value='add'><br>
+	</form>
 
+
+	finder <br>
+	<form action='/find_by_location', method='POST'>
+		Lat <input type="text" name="lat"><br>
+		<input type="submit" name="find!"><br>
 	</form>
 
 </body>
