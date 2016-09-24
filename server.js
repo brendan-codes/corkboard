@@ -7,9 +7,11 @@ var express    = require('express'),
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './client/views'));
 app.use(express.static(path.join(__dirname, "./client")));
+app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
-require('./config/routes.js')(app);
+require('./server/config/mongoose.js');
+require('./server/config/routes.js')(app);
 
 app.listen(8001, function(){
 	console.log('Corkboard on port 8001');
