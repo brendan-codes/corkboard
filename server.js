@@ -1,4 +1,4 @@
-cd var express    = require('express'),
+var express    = require('express'),
 	path       = require('path'),
 	bodyParser = require('body-parser'),
 	app        = express();
@@ -13,4 +13,4 @@ require('./config/routes.js')(app);
 
 app.listen(8001, function(){
 	console.log('Corkboard on port 8001');
-})
+});
