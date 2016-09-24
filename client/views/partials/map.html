@@ -16,9 +16,6 @@
         padding: 20px;
       }
     </style>
-  </head>
-  <body>
-    <div id="map"></div>
     <script>
       var map;
       function initMap() {
@@ -26,9 +23,17 @@
           center: {lat: 37.615223, lng: -122.389977},
           zoom: 11
         });
+        var marker = new google.maps.Marker({
+          position: {lat: 37.615223, lng: -122.389977},
+          map: map,
+          title: 'Hello World!'
+        });
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9T2cBIi2EnmPnPnd5WWuTu-eHu5DAB-I&callback=initMap"
     async defer></script>
+  </head>
+  <body>
+    <div id="map"></div>
   </body>
 </html>
