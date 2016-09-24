@@ -1,85 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
-    <title>SimpleMarkerSymbol with SVG Path - Simplified</title>
-    <link rel="stylesheet" href="https://js.arcgis.com/3.18/dijit/themes/claro/claro.css">
-    <link rel="stylesheet" href="https://js.arcgis.com/3.18/dojox/widget/ColorPicker/ColorPicker.css">
-    <link rel="stylesheet" href="https://js.arcgis.com/3.18/esri/css/esri.css">
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
     <style>
-      html, body, #map {
-        height:400px;
-        width:400px;
-        margin:0;
-        padding:20;
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
       }
-      .dojoxColorPicker {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        -moz-box-shadow: 0 0 7px #888;
-        -webkit-box-shadow: 0 0 7px #888;
-        box-shadow: 0 0 7px #888;
+      #map {
+        height: 400px;
+        width: 400px;
+        padding: 20px;
       }
     </style>
-    <script src="https://js.arcgis.com/3.18/"></script>
+  </head>
+  <body>
+    <div id="map"></div>
     <script>
       var map;
-      
-      require([
-        "esri/map", "esri/geometry/Point", 
-        "esri/symbols/SimpleMarkerSymbol", "esri/graphic",
-        "dojo/_base/array", "dojo/dom-style", "dojox/widget/ColorPicker", 
-        "dojo/domReady!"
-      ], function(
-        Map, Point,
-        SimpleMarkerSymbol, Graphic,
-        arrayUtils, domStyle, ColorPicker
-      ) {
-
-        map = new Map("map",{
-          // basemap: "oceans",
-          basemap: "streets",
-          center: [ -122.389977,37.615223],
-          zoom: 12,
-          minZoom: 2
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 37.615223, lng: -122.389977},
+          zoom: 11
         });
-        
-        map.on("load", mapLoaded);
-      
-        function mapLoaded(){
-          var points = [[-122.389977,37.615223]];
-          var iconPath = "M16,3.5c-4.142,0-7.5,3.358-7.5,7.5c0,4.143,7.5,18.121,7.5,18.121S23.5,15.143,23.5,11C23.5,6.858,20.143,3.5,16,3.5z M16,14.584c-1.979,0-3.584-1.604-3.584-3.584S14.021,7.416,16,7.416S19.584,9.021,19.584,11S17.979,14.584,16,14.584z";
-          var initColor = "black";
-          arrayUtils.forEach(points, function(point) {
-            var graphic = new Graphic(new Point(point), createSymbol(iconPath, initColor));
-            map.graphics.add(graphic);
-          });
-          
-          var colorPicker = new ColorPicker({}, "picker1");
-          colorPicker.setColor(initColor);
-          domStyle.set(colorPicker, "left", "500px");
-          colorPicker.on("change", function(){
-            var colorCode = this.hexCode.value;
-            map.graphics.graphics.forEach(function(graphic){
-              graphic.setSymbol(createSymbol(iconPath, colorCode));
-            });
-          });
-        }
-        
-        function createSymbol(path, color){
-          var markerSymbol = new esri.symbol.SimpleMarkerSymbol();
-          markerSymbol.setPath(path);
-          markerSymbol.setColor(new dojo.Color(color));
-          markerSymbol.setOutline(null);
-          return markerSymbol;
-        }
-      });
+      }
     </script>
-  </head>
-  <body class="claro">
-    <div id="map"></div>
-    <!-- <div id="picker1"></div> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9T2cBIi2EnmPnPnd5WWuTu-eHu5DAB-I&callback=initMap"
+    async defer></script>
   </body>
 </html>
