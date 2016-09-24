@@ -17,7 +17,23 @@ module.exports = (function(){
 
 			},
 			find_by_location: function(req, res){
-				Note.find({location: {lat: req.body.lat}}, function(err, results){
+				console.log(parseFloat(req.body.lat));
+				// res.redirect('/');
+
+
+				var finder_object = {
+										lat: { 
+												$gt: parseFloat(req.body.lat) - 0.1,
+												$lt: parseFloat(req.body.lat) + 0.1
+											 },
+									    long: {
+									    		$gt: parseFloat(req.body.long) - 0.1,
+									    		$lt: parseFloat(req.body.long) + 0.1
+									   		  }
+									}
+
+
+				Note.find(finder_object, function(err, results){
 					console.log(results);
 					res.redirect('/');
 				})
