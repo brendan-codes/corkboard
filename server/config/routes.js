@@ -8,6 +8,9 @@ module.exports = function(app){
 	app.get('/', Views.main);
 
 	// Note routing
+	app.post('/notes/add', function(req, res){
+		Notes.add(req, res);
+	});
 	app.post('/find_by_location', Notes.find_by_location);
 
 

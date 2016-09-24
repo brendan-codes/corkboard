@@ -1,20 +1,32 @@
-var Note = require('../models/note.js');
+// var Note = require('../models/note.js');
+var mongoose = require('mongoose');
+var Note = mongoose.model('Note');
 
 module.exports = (function(){
 	return {
-			add: function(req, res){
-				console.log(req.body);
-				req.redirect('/');
-			},
-			find_by_location: function(req, res){
+			add: function(res, req){
+				var data_obj = { 
+									name: res.body.name,
+									location: {
+										long: res.body.long,
+										lat: res.body.lat
+							 	    }
+								}
+				var new_note = new Note(data_obj);
+				new_note.save(function(err, data){
+					req.redirect('/');
+				})
 
 			},
-
-			find_by_name: function(req, res){
+			find_by_location: function(res, req){
 
 			},
 
-			index: function(req, res){
+			find_by_name: function(res, req){
+
+			},
+
+			index: function(res, req){
 				res.render('index')
 			}
 
