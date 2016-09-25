@@ -7,6 +7,7 @@ var config_geocoder = require('../../config_geocoder.js')
 module.exports = (function(){
 	return {
 			add: function(req, res){
+				console.log(req.body);
 				var clean_name = req.body.name.trim().toLowerCase();
 				var data_obj = {
 									name: clean_name,
