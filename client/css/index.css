@@ -11,6 +11,9 @@
   min-height: 100vh;
   width: 100%;
 }
+.splash-head {
+  height: 100vh;
+}
 .myheader {
   margin: -10px;
 }
@@ -33,7 +36,7 @@
   font-size: 1.5em;
 }
 .valign-wrapper {
-  height: 60vh;
+  height: 50vh;
 }
 .valign {
   margin: 0 auto;
@@ -46,11 +49,15 @@
   bottom: 10vh;
 }
 .subheader {
-  color: rgba(255, 255, 255, 0.90);
+  color: #fff;
+  text-shadow: 0 0 10px #221f1a;
   text-align: center;
   width: 100%;
+  font-weight: bold;
+  opacity: 0.8;
+  padding-bottom: 20px;
 }
-.arrow {
+.arrow, .up-arrow {
   display: block;
   margin: 0 auto;
   width: 80px;
@@ -58,11 +65,15 @@
   position: relative;
   bottom: 3vh;
 }
+.up-arrow {
+  margin-top: 80px;
+}
 .nav_pane {
-  /*background-color: #fff;*/
   width: 100%;
   margin: 0 auto;
+  margin-top: 30px;
   padding: 20px;
+  height: 100vh;
 }
 .nav_box {
   background-color: #fff;
