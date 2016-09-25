@@ -73,7 +73,12 @@ $(document).ready(function() {
               console.log(res);
             });
             return false;
-          })
+          });
+          $('#notes_button').on('click', function(){
+            console.log('test');
+            view = 'view_note';
+            updateView();
+          });
         });
         break;
       case 'make_note':
