@@ -75,9 +75,10 @@ $(document).ready(function() {
         });
         break;
       case 'map':
-        $( "#body" ).load( "/views/partials/navbar.html", function(){
-          $(".nav-list li a").removeClass("selected");
-          $('#map_button').addClass('selected');
+        $( "#body" ).load( "/views/partials/map.html", function(){
+          $(".nav-list li a").removeClass("active");
+          $('#map_button').addClass('active');
+          $.getScript("../js/map.js");
         });
         break;
       // case 'about':
