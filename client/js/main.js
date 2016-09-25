@@ -115,10 +115,12 @@ $(document).ready(function() {
         });
         break;
       case 'map':
-        $( "#body" ).load( "/views/partials/navbar.html", function(){
+        $( "#body" ).load( "/views/partials/map.html", function(){
           $(".nav-list li a").removeClass("selected");
           $('#map_button').addClass('selected');
+          $('nav').transit({top: '0px'});
           $('#body').transition({opacity: 1});
+          $.getScript("../js/map.js");
         });
         break;
       // case 'about':
