@@ -74,6 +74,27 @@ $(document).ready(function() {
           $('#make_note_button').addClass('selected');
           $('nav').transit({top: '0px'});
           $('#body').transition({opacity: 1});
+          $('#name').click(function(){
+            $('#name').attr('placeholder', 'your name or the name of the person you are looking for');
+          });
+          $('#age').click(function(){
+            $('#age').attr('placeholder', 'your age or the age of the person you are looking for');
+          });
+          $('#location').click(function(){
+            $('#location').attr('placeholder', 'enter your location');
+          });
+          $('#contact').click(function(){
+            $('#contact').attr('placeholder', 'list as many means of contact as you wish');
+          });
+          $('#note').click(function(){
+            $('#note').attr('placeholder', 'enter a message to your loved one, including further location details or additional details on how to contact you');
+          });
+          $('.submit-make-note').click(function(){
+            var details = $('form').serialize();
+            $.post('/notes/add)', details, function(res){
+              console.log(res);
+            })
+          });
         });
         break;
       case 'map':

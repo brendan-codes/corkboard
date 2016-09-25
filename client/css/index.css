@@ -12,13 +12,13 @@
   width: 100%;
 }
 .splash-head {
-  height: 100vh;
+  height: 90vh;
 }
 .myheader {
   margin: -10px;
 }
 .main {
-  margin: 20px;
+  margin: 20px 0;
 }
 .small_image {
   display: inline-block;
@@ -28,7 +28,7 @@
   padding: 10px;
 }
 .jumbo {
-  font-size: 10em;
+  font-size: 8em;
   font-weight: bold;
   color: rgba(230, 230, 230, 0.9);
 }
@@ -36,7 +36,7 @@
   font-size: 1.5em;
 }
 .valign-wrapper {
-  height: 50vh;
+  height: 37vh;
 }
 .valign {
   margin: 0 auto;
@@ -107,4 +107,7 @@
   bottom: 20px;
   left: 20px;
   background-color: #6eaa51;
+}
+.submit-container {
+  margin-top: 50px;
 }
