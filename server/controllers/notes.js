@@ -12,6 +12,14 @@ module.exports = (function(){
 				console.log(req.body)
 				var clean_name = req.body.name.trim().toLowerCase();
 
+				var new_path = req.file.path.split('client/').join('');
+
+				if(req.file){
+					var image_path = req.file.path.split('client/').join('');
+				}else{
+					var image_path = 'imgs/defualtIcon.png';
+				}
+
 				if(req.body.location !== null){
 					console.log(req.body.location)
 					geocoder.geocode(req.body.location, function ( err, data ) {
@@ -25,7 +33,8 @@ module.exports = (function(){
 									lat: lat,
 									long: long,
 									note: req.body.note,
-									contact: req.body.contact
+									contact: req.body.contact,
+									image: image_path
 								}
 							Note.create(data_obj, function(err, result){
 								console.log(data_obj.lat, "data_object.lat")
