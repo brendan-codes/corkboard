@@ -15,8 +15,6 @@ module.exports = (function(){
 				if(req.body.location !== null){
 					console.log(req.body.location)
 					geocoder.geocode(req.body.location, function ( err, data ) {
-						// console.log(data.results[0].geometry.location.lat)
-						// console.log(data.results[0].geometry.location.lng)
 						lat = data.results[0].geometry.location.lat
 						long = data.results[0].geometry.location.lng
 					
@@ -29,19 +27,12 @@ module.exports = (function(){
 									note: req.body.note,
 									contact: req.body.contact
 								}
-							console.log(data_obj.lat, "data_object.lat")
-							res.json(data_obj.lat, data_obj.long);
-							// Note.find(finder_object, function(err, results){
-
-							// 	console.log(err, "err")
-							// 	console.log(results, "results");
-							// 	res.json(results);
-							// })
 						})
 					}
-				// else{
-			
-
+				Note.create(data_obj, function(err, result){
+					console.log(data_obj.lat, "data_object.lat")
+					res.json(data_obj.lat, data_obj.long);
+				})				
 			},
 			get_by_id: function(req, res){
 				Note.findOne({_id: req.params.id}, function(err, found_note){
