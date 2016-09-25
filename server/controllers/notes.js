@@ -7,21 +7,32 @@ var config_geocoder = require('../../config_geocoder.js')
 module.exports = (function(){
 	return {
 			add: function(req, res){
-				console.log(req.body);
+				var lat;
+				var long;
+				console.log(req.body)
 				var clean_name = req.body.name.trim().toLowerCase();
-				var data_obj = {
+
+				if(req.body.location !== null){
+					console.log(req.body.location)
+					geocoder.geocode(req.body.location, function ( err, data ) {
+						lat = data.results[0].geometry.location.lat
+						long = data.results[0].geometry.location.lng
+
+							var data_obj = {
 									name: clean_name,
 									age: req.body.age,
-									address: req.body.address,
-									lat: req.body.lat,
-									long: req.body.long,
+									address: req.body.location,
+									lat: lat,
+									long: long,
 									note: req.body.note,
 									contact: req.body.contact
 								}
-				var new_note = new Note(data_obj);
-				new_note.save(function(err, data){
-					res.json("success");
-				});
+						})
+					}
+				Note.create(data_obj, function(err, result){
+					console.log(data_obj.lat, "data_object.lat")
+					res.json(data_obj.lat, data_obj.long);
+				})
 			},
 			get_by_id: function(req, res){
 				Note.findOne({_id: req.params.id}, function(err, found_note){

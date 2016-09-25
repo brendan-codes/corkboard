@@ -152,6 +152,7 @@ updateView();
         break;
       case 'view_note':
         $( "#body" ).load( "/views/partials/note.html");
+          $.getScript("../js/map.js");
         break;
       case 'about':
         $( "#body" ).load( "/views/partials/about.html");
