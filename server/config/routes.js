@@ -5,7 +5,7 @@ var Views = require('../controllers/views.js');
 module.exports = function(app){
 
 	// View routing
-  app.get('/main', Views.main);
+  	app.get('/main', Views.main);
 	app.get('/sandbox', Views.sandbox);
 
 	// Note routing
@@ -15,9 +15,6 @@ module.exports = function(app){
 	app.post('/find_by_location', function(req, res){
 		Notes.find_by_location(req, res);
 	});
-
-
-
 
 
 };

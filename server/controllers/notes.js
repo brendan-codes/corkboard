@@ -17,6 +17,7 @@ module.exports = (function(){
 
 			},
 			find_by_location: function(req, res){
+				console.log(req)
 				console.log(parseFloat(req.body.lat));
 				console.log("radius", req.body.radius);
 				// res.redirect('/');
@@ -41,7 +42,7 @@ module.exports = (function(){
 
 				Note.find(finder_object, function(err, results){
 					console.log(results);
-					res.redirect('/');
+					res.redirect('/main');
 				})
 			},
 
