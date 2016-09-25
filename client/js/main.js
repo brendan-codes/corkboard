@@ -20,7 +20,11 @@ $(document).ready(function() {
   function updateView(){
     switch (view) {
       case 'index':
-        $( "#body" ).load( "/views/partials/index.html");
+        $( "#body" ).load( "/views/partials/index.html", function(){
+          $('#scroll_down').click(function(){
+            window.scrollTo(0, document.body.scrollHeight);
+          });
+        });
         break;
       case 'search':
         $( "#body" ).load( "/views/partials/search.html");

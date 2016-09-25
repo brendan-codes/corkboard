@@ -38,13 +38,62 @@
 .valign {
   margin: 0 auto;
 }
-.logo {
+
+.logo, .subheader {
   display: block;
   margin: 0 auto;
   width: 180px;
   position: relative;
   bottom: 10vh;
 }
-.enter_button {
 
+.subheader {
+  color: rgba(255, 255, 255, 0.90);
+  text-align: center;
+  width: 100%;
+}
+.arrow {
+  display: block;
+  margin: 0 auto;
+  width: 80px;
+  opacity: 0.9;
+  position: relative;
+  bottom: 3vh;
+}
+.nav_pane {
+  /*background-color: #fff;*/
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+.nav_box {
+  background-color: #fff;
+  display: inline-block;
+  vertical-align: top;
+  width: 30%;
+  margin: 0 0 0 3%;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 10px #221f1a;
+  opacity: 0.9;
+  height: 460px;
+  position: relative;
+}
+.front-icon {
+  margin: 0 auto;
+  width: 60px;
+  display: inline-block;
+  padding-top: 20px;
+}
+.nav_box p {
+  text-align: left;
+  border-top: 1px solid #bdbdbd;
+  padding-top: 20px;
+  margin: 20px;
+}
+.btn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background-color: #6eaa51;
 }
