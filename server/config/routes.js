@@ -15,6 +15,10 @@ module.exports = function(app){
 	app.post('/notes/add', upload.single('avatar'), function(req, res){
 		Notes.add(req, res);
 	});
+
+	app.get('/everybody', function(req, res){
+		Notes.all_notes(req, res);
+	})
 	app.post('/find_by_location', function(req, res){
 		Notes.find_by_location(req, res);
 	});

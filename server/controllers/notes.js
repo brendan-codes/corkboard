@@ -105,6 +105,16 @@ module.exports = (function(){
 					}
 				})
 			},
+			all_notes: function(req, res){
+				Note.find({}, function(err, notes){
+					console.log(notes);
+					if(err){
+						res.json(err);
+					}else{
+						res.json(notes);
+					}
+				})
+			},
 			add_image: function(req, res){
 
 				console.log(req.file);
@@ -115,6 +125,7 @@ module.exports = (function(){
 
 				Note.update({_id: req.body.id}, {image: new_path}, function(err, results){
 					console.log(results);
+					res.end();
 				})
 
 

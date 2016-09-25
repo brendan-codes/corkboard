@@ -91,7 +91,7 @@ updateView();
                 post += "<div class='card-action' id='notes_button' noteId='"+i+"'>";
                 post += "<a>View My Notes</a></div></div></div></div><hr>";
 
-                $('#post-box').append("");
+                $('#post-box').append(post);
 
               }
             });
