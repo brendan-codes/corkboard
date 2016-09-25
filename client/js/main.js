@@ -70,7 +70,8 @@ updateView();
           $('nav').transit({top: '0px'});
           $('#body').transition({opacity: 1});
           $('#search-submit').click(function(){
-            var data = $('.search-form').serialize();
+            // var data = $('.search-form').serialize();
+            var data = {'name': $('#search').val()};
             $.post('/find_by_name', data, function(res){
               console.log(res);
             });
