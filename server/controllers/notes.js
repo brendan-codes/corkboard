@@ -11,8 +11,8 @@ module.exports = (function(){
 				var long;
 				console.log(req.body)
 				var clean_name = req.body.name.trim().toLowerCase();
-
-				if(req.body.location !== null){
+				console.log(req.body);
+				if(req.body.location !== ''){
 					console.log(req.body.location)
 					geocoder.geocode(req.body.location, function ( err, data ) {
 						lat = data.results[0].geometry.location.lat
@@ -32,11 +32,21 @@ module.exports = (function(){
 								res.json(data_obj.lat, data_obj.long);
 							})
 						})
+					} else {
+						var data_obj = {
+								name: clean_name,
+								age: req.body.age,
+								// address: req.body.location,
+								lat: req.body.lat,
+								long: req.body.long,
+								note: req.body.note,
+								contact: req.body.contact
+							}
+						Note.create(data_obj, function(err, result){
+							console.log(data_obj.lat, "data_object.lat")
+							res.json(data_obj.lat, data_obj.long);
+						})
 					}
-				Note.create(data_obj, function(err, result){
-					console.log(data_obj.lat, "data_object.lat")
-					res.json(data_obj.lat, data_obj.long);
-				})
 			},
 			get_by_id: function(req, res){
 				Note.findOne({_id: req.params.id}, function(err, found_note){
