@@ -1,6 +1,9 @@
 var Notes = require('../controllers/notes.js');
 var Views = require('../controllers/views.js');
 
+var multer   = require('multer');
+var upload = multer({dest: 'client/imgs/'});
+
 
 module.exports = function(app){
 
@@ -10,7 +13,7 @@ module.exports = function(app){
 	// app.get('/sandbox', Views.sandbox);
 	
 	// Note routing
-	app.post('/notes/add', function(req, res){
+	app.post('/notes/add', upload.single('avatar'), function(req, res){
 		Notes.add(req, res);
 	});
 	app.post('/find_by_location', function(req, res){
@@ -24,6 +27,9 @@ module.exports = function(app){
 	});
 	app.post('/reply/add', function(req, res){
 		Notes.add_reply(req, res);
+	});
+	app.post('/image/add', upload.single('avatar'), function(req, res){
+		Notes.add_image(req, res);
 	});
 
 	// Sandbox 

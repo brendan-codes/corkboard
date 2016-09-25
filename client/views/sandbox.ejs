@@ -33,6 +33,11 @@
 		<li><%= note.created_at %></li>
 		<li><%= note.timeout %></li>
 		<li><%= note.updated_at %></li>
+		<% if(note.image){ %>
+
+			<img src="<%= note.image %>" data='image/jpeg' charset='utf-8;base64'>
+
+		<% } %>
 
 		<form action='/reply/add' method='POST'>
 
@@ -41,6 +46,12 @@
 			<input type="hidden" value='<%= note._id %>' name="id">
 			<input type="submit" value='reply!'>
 			
+		</form>
+
+		<form action='/image/add' method='POST' enctype='multipart/form-data'>
+			<input type="file" name="avatar">
+			<input type="hidden" value='<%= note._id %>' name="id">
+			<input type="submit" value='upload!'>
 		</form>
 		<hr>
 
