@@ -42,20 +42,6 @@ module.exports = (function(){
 							})
 						})
 					} else {
-						var data_obj = {
-								name: clean_name,
-								age: req.body.age,
-								// address: req.body.location,
-								lat: req.body.lat,
-								long: req.body.long,
-								note: req.body.note,
-								contact: req.body.contact
-							}
-						Note.create(data_obj, function(err, result){
-							console.log(data_obj.lat, "data_object.lat")
-							res.json(data_obj.lat, data_obj.long);
-						})
-					}else{
 
 						var data_obj = {
 									name: clean_name,
