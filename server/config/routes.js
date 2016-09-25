@@ -22,6 +22,9 @@ module.exports = function(app){
 	app.get('/note/:id', function(req, res){
 		Notes.get_by_id(req, res);
 	});
+	app.post('/reply/add', function(req, res){
+		Notes.add_reply(req, res);
+	});
 
 	// Sandbox 
 	app.get('/sandbox', function(req, res){

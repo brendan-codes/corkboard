@@ -30,20 +30,26 @@ module.exports = (function(){
 				});
 			},
 			add_reply: function(req, res){
-				Note.findOne({_id: req.body.id}, function(err, found_note){
+				var reply = {
+				   reply: req.body.reply,
+				   contact: req.body.contact
+				};
+				Note.update({_id: req.body.id}, {$addToSet: {replies: reply}, timeout: Date.now(), updated_at: Date.now()}, function(err, found_note){
 					if(err){
 						res.json('error!');
 					}else{	
-						var reply = {
-									   reply: req.body.reply,
-									   contact: req.body.contact
-									}
-						found_note.replies.push(reply);
-						found_note.timeout = Date.now;
-						found_note.updated_at = Date.now;
-						found_note.save(function(err, success){
-							res.json(success);
-						})
+						// var reply = {
+						// 			   reply: req.body.reply,
+						// 			   contact: req.body.contact
+						// 			}
+						// found_note.replies.push(reply);
+						// found_note.timeout = Date.now;
+						// found_note.updated_at = Date.now;
+						// console.log(found_note);
+						// found_note.save(function(err, success){
+						// 	console.log(success);
+						res.redirect('/');
+						// })
 					}
 				});
 			},
