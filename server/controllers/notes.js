@@ -41,7 +41,7 @@ module.exports = (function(){
 
 				Note.find(finder_object, function(err, results){
 					console.log(results);
-					res.redirect('/');
+					res.redirect('/main');
 				})
 			},
 

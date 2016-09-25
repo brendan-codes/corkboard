@@ -1,0 +1,9 @@
+#recenter {
+	position: relative;
+	top: 395px;
+	left: 70px;
+	z-index: 30;
+}
+#search{
+	display: inline-block;
+}
