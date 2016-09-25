@@ -69,8 +69,17 @@ $(document).ready(function() {
           $('#location').click(function(){
             $('#location').attr('placeholder', 'enter your location');
           });
+          $('#contact').click(function(){
+            $('#contact').attr('placeholder', 'list as many means of contact as you wish');
+          });
           $('#note').click(function(){
-            $('#note').attr('placeholder', 'enter a message to your loved one, including further location details or contact information');
+            $('#note').attr('placeholder', 'enter a message to your loved one, including further location details or additional details on how to contact you');
+          });
+          $('.submit-make-note').click(function(){
+            var details = $('form').serialize();
+            $.post('/notes/add)', details, function(res){
+              console.log(res);
+            })
           });
         });
         break;
