@@ -1,9 +1,10 @@
-<div class='map-div'>
-    <form action ="/find_by_location" type = "POST" id="search">
-        Search:<input type="text" name="search_location">
-        <input type="submit" value="Search">
+<div>
+    <form id="search-form">
+        <label>Search:</label>
+        <input type="text" name="search_location">
+        <button class="btn search-submit">Search</button>
     </form>
     <br>
-    <button id = "recenter">Recenter</button>
+    <button class="btn" id="recenter">Recenter</button>
     <div id="map" style="width: 500px; height: 400px;"></div>
 </div>

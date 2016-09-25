@@ -1,65 +1,105 @@
 // var Note = require('../models/note.js');
 var mongoose = require('mongoose');
 var Note = mongoose.model('Note');
+var geocoder = require('geocoder');
+var config_geocoder = require('../../config_geocoder.js')
 
 module.exports = (function(){
 	return {
 			add: function(req, res){
-				console.log(req.body);
-				console.log(req.files);
-				var some_thing = {'test': 'data'}
-				res.json(some_thing);
-				// var data_obj = {
-				// 					name: req.body.name,
-				// 					lat: req.body.lat,
-				// 					long: req.body.long
-				// 				}
-				// var new_note = new Note(data_obj);
-				// new_note.save(function(err, data){
-				// 	res.redirect('/');
-				// })
-
+				var clean_name = req.body.name.trim().toLowerCase();
+				var data_obj = {
+									name: clean_name,
+									age: req.body.age,
+									address: req.body.address,
+									lat: req.body.lat,
+									long: req.body.long,
+									note: req.body.note,
+									contact: req.body.contact
+								}
+				var new_note = new Note(data_obj);
+				new_note.save(function(err, data){
+					res.json("success");
+				});
 			},
-			find_by_location: function(req, res){
-				console.log(parseFloat(req.body.lat));
-				console.log("radius", req.body.radius);
-				// res.redirect('/');
-
-        var latTraveledMiles = 100;
-        var latTraveledKM = 100 * 0.621371;
-        var latTraveledDeg = (1 / 110.54) * latTraveledKM;
-
-        console.log("latTraveledDeg", latTraveledDeg);
-
-				var finder_object = {
-										lat: {
-												$gt: parseFloat(req.body.lat) - 0.1,
-												$lt: parseFloat(req.body.lat) + 0.1
-											 },
-									    long: {
-									    		$gt: parseFloat(req.body.long) - 0.1,
-									    		$lt: parseFloat(req.body.long) + 0.1
-									   		  }
-									}
-
-
-				Note.find(finder_object, function(err, results){
-					console.log(results);
-					res.redirect('/main');
+			get_by_id: function(req, res){
+				Note.findOne({_id: req.params.id}, function(err, found_note){
+					if(err){
+						res.json('error!');
+					}else{
+						res.json(found_note);
+					}
+				});
+			},
+			add_reply: function(req, res){
+				var reply = {
+				   reply: req.body.reply,
+				   contact: req.body.contact
+				};
+				Note.update({_id: req.body.id}, {$addToSet: {replies: reply}, timeout: Date.now(), updated_at: Date.now()}, function(err, found_note){
+					if(err){
+						res.json('error!');
+					}else{
+						// var reply = {
+						// 			   reply: req.body.reply,
+						// 			   contact: req.body.contact
+						// 			}
+						// found_note.replies.push(reply);
+						// found_note.timeout = Date.now;
+						// found_note.updated_at = Date.now;
+						// console.log(found_note);
+						// found_note.save(function(err, success){
+						// 	console.log(success);
+						res.json("sucess");
+						// })
+					}
+				});
+			},
+			all: function(req, res){
+				Note.find({}, function(err, notes){
+					if(err){
+						res.json(err);
+					}else{
+						res.render('sandbox', {notes: notes});
+					}
 				})
 			},
+			find_by_location: function(req, res){
+				console.log(req.body.search_location, "req")
 
-			find_by_name: function(res, req){
+		      	geocoder.geocode(req.body.search_location, function ( err, data ) {
+					// console.log("in geocoder", data.results[0].geometry.bounds)
+					console.log(data.results[0].geometry.location.lat)
+					console.log(data.results[0].geometry.location.lng)
+					lat = data.results[0].geometry.location.lat
+					long = data.results[0].geometry.location.lng
 
+
+					var finder_object = {
+										lat: {
+												$gt: parseFloat(lat) - 0.1,
+												$lt: parseFloat(lat) + 0.1
+											 },
+									    long: {
+									    		$gt: parseFloat(long) - 0.1,
+									    		$lt: parseFloat(long) + 0.1
+									   		  }
+									}
+					Note.find(finder_object, function(err, results){
+						console.log(results);
+						res.json(results);
+					})
+				});
 			},
-
-			index: function(res, req){
-				res.render('index')
+			find_by_name: function(req, res){
+				if(req.body.name){
+					var clean_name = req.body.name.trim().toLowerCase()
+					Note.find({name: clean_name}, function(err, results){
+						res.json(results);
+					})
+				}else{
+					res.json('not a name');
+				}
 			}
-
-
-
-
-
 	}
 })()
