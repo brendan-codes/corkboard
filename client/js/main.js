@@ -33,7 +33,7 @@ $(document).ready(function() {
 
 updateView();
 
-  function updateView(){
+  function updateView(post){
     switch (view) {
       case 'index':
         $( "#body" ).load( "/views/partials/index.html", function(){
@@ -65,6 +65,8 @@ updateView();
         break;
       case 'search':
         $( "#body" ).load( "/views/partials/search.html", function(){
+          var notesArr = [];
+
           $(".nav-list li a").removeClass("selected");
           $('#search_button').addClass('selected');
           $('nav').transit({top: '0px'});
@@ -73,11 +75,9 @@ updateView();
             // var data = $('.search-form').serialize();
             var data = {'name': $('#search').val()};
             $.post('/find_by_name', data, function(notes){
-              console.log(notes);
+              notesArr = notes;
 
               for (var i in notes){
-                console.log(i);
-
                 var post = "";
                 post += "<div class='col s12 m12'><div class='card horizontal'><div class='card-image'>";
                 post += "<img src="+ notes[i].image +" data='image/jpeg' charset='utf-8;base64' class='small_image'>";
@@ -88,20 +88,25 @@ updateView();
                 post += "<p>"+ notes[i].note +"</p>";
                 post += "<p>"+ notes[i].contact +"</p>";
                 post += "</div>";
-                post += "<div class='card-action' id='notes_button' noteId='"+i+"'>";
-                post += "<a>View My Notes</a></div></div></div></div><hr>";
+                post += "<div class='card-action'>";
+                post += "<a class='notes_button' noteId='"+i+"'>View My Notes</a></div></div></div></div><hr>";
 
-                $('#post-box').append("");
-
+                $('#post-box').append(post);
               }
             });
             return false;
           });
-          $('#notes_button').on('click', function(){
-            $('#body').css('opacity', 0);
-            view = 'view_note';
-            updateView();
+          $('.notes_button').click(function(){
+              $('#body').css('opacity', 0);
+              postId = $(this).attr('postId');
+              view = 'view_note';
+              updateView(postArr[postId]);
           });
+          // $('#notes_button').on('click', function(){
+          //   $('#body').css('opacity', 0);
+          //   view = 'view_note';
+          //   updateView();
+          // });
         });
         break;
       case 'make_note':
@@ -173,6 +178,7 @@ updateView();
         });
         break;
       case 'view_note':
+        console.log(post);
         $( "#body" ).load( "/views/partials/note.html");
           $.getScript("../js/map.js");
           $('#body').transition({opacity: 1});
