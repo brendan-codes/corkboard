@@ -1,1 +1,51 @@
-Make Note
+<div class="row no-bottom-margin">
+  <div class="col s12 m12">
+    <div class="card-panel white">
+      <div class="row">
+        <form class="col s12 make-note">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="name" type="text" name="name">
+              <label for="name" data-error="wrong" data-success="right">Name:</label>
+            </div>
+            <div class="input-field col s6">
+              <input id="age" type="text" name="age">
+              <label for="age">Age:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="location" type="text" name="location">
+              <label for="location" data-error="wrong" data-success="right">Location:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="contact" type="text" name="contact">
+              <label for="contact" data-error="wrong" data-success="right">Contact:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea id="note" class="materialize-textarea" name="note"></textarea>
+              <label for="note">Note:</label>
+            </div>
+          </div>
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>File</span>
+              <input type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+          <div class="input-field col s12 submit-container">
+            <input type="button" value="submit" class="btn submit-make-note">
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

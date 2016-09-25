@@ -8,7 +8,7 @@ module.exports = (function(){
 	return {
 			add: function(req, res){
 				var clean_name = req.body.name.trim().toLowerCase();
-				var data_obj = { 
+				var data_obj = {
 									name: clean_name,
 									age: req.body.age,
 									address: req.body.address,
@@ -39,7 +39,7 @@ module.exports = (function(){
 				Note.update({_id: req.body.id}, {$addToSet: {replies: reply}, timeout: Date.now(), updated_at: Date.now()}, function(err, found_note){
 					if(err){
 						res.json('error!');
-					}else{	
+					}else{
 						// var reply = {
 						// 			   reply: req.body.reply,
 						// 			   contact: req.body.contact
@@ -73,7 +73,7 @@ module.exports = (function(){
 					console.log(data.results[0].geometry.location.lng)
 					lat = data.results[0].geometry.location.lat
 					long = data.results[0].geometry.location.lng
-				
+
 
 					var finder_object = {
 										lat: {
@@ -88,7 +88,7 @@ module.exports = (function(){
 					Note.find(finder_object, function(err, results){
 						console.log(results);
 						res.json(results);
-					})	
+					})
 				});
 			},
 			find_by_name: function(req, res){

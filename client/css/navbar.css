@@ -1,18 +1,6 @@
 nav{
   position: relative;
   top: -65px;
-  -webkit-animation: slide 1s forwards; /* Chrome, Safari, Opera */
-  animation: slide 1s forwards;
-}
-
-/* Chrome, Safari, Opera */
-@-webkit-keyframes slide {
-  100%{top: 0px;}
-}
-
-/* Standard syntax */
-@keyframes slide {
-  100%{top: 0px;}
 }
 
 #nw{
@@ -40,14 +28,9 @@ li a {
   -webkit-box-sizing: border-box;
 }
 
-.active {
+.selected {
   background-color: #639949;
-  -moz-box-shadow:    inset 2px 0 0 #5d9144;
-  -moz-box-shadow:    inset -2px 0 0 #5d9144;
-  -webkit-box-shadow: inset 2px 0 0 #5d9144;
-  -webkit-box-shadow: inset -2px 0 0 #5d9144;
-  box-shadow:         inset 2px 0 0 #5d9144;
-  box-shadow:         inset -2px 0 0 #5d9144;
-  /*border-left: 1px solid #5d9144;
-  border-right: 1px solid #5d9144;*/
+  -moz-box-shadow:    inset 2px 0 2px #5d9144, inset -2px 0 2px #5d9144;
+  -webkit-box-shadow: inset 2px 0 2px #5d9144, inset -2px 0 2px #5d9144;
+  box-shadow:         inset 2px 0 2px #5d9144, inset -2px 0 2px #5d9144;
 }

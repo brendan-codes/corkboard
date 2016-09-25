@@ -7,3 +7,11 @@
   min-height: 100vh;
   width: 100%;
 }
+
+#body {
+  opacity: 0;
+}
+
+.no-bottom-margin {
+  margin-bottom: 0px !important;
+}
