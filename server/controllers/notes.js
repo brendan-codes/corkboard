@@ -11,11 +11,6 @@ module.exports = (function(){
 				var long;
 				console.log(req.body)
 				var clean_name = req.body.name.trim().toLowerCase();
-<<<<<<< HEAD
-				console.log(req.body);
-				if(req.body.location !== ''){
-=======
-
 				// var new_path = req.file.path.split('client/').join('');
 
 				if(req.file){
@@ -26,7 +21,6 @@ module.exports = (function(){
 
 				console.log(req.body.location);
 				if(req.body.location !== ''){
->>>>>>> 47e2ab736983de7b6cf6b81d569d14d66b14dff0
 					console.log(req.body.location)
 					geocoder.geocode(req.body.location, function ( err, data ) {
 						lat = data.results[0].geometry.location.lat
