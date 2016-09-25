@@ -33,3 +33,21 @@ nav{
 .forest-green {
   background-color: #6eaa51;
 }
+
+li a {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.active {
+  background-color: #639949;
+  -moz-box-shadow:    inset 2px 0 0 #5d9144;
+  -moz-box-shadow:    inset -2px 0 0 #5d9144;
+  -webkit-box-shadow: inset 2px 0 0 #5d9144;
+  -webkit-box-shadow: inset -2px 0 0 #5d9144;
+  box-shadow:         inset 2px 0 0 #5d9144;
+  box-shadow:         inset -2px 0 0 #5d9144;
+  /*border-left: 1px solid #5d9144;
+  border-right: 1px solid #5d9144;*/
+}
