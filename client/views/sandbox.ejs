@@ -10,19 +10,58 @@
 	adder <br>
 	<form action='/notes/add' method='POST'>
 		Name: <input type="text" name="name"><br>
+		Age: <input type="text" name="age"><br>
 		Lat: <input type="text" name="lat"><br>
 		Long: <input type="text" name="long"><br>
+		Address: <input type="text" name="address"><br>
+		Note: <textarea name='note'></textarea><br>
+		Contact: <textarea name='contact'></textarea><br>
 		<input type="submit" value='add'><br>
 	</form>
+	<hr>
+
+	<% for(var note of notes) { %>
+
+		<li><%= note.name %></li>
+		<li><%= note.age %></li>
+		<li><%= note.address %></li>
+		<li><%= note.lat %></li>
+		<li><%= note.long %></li>
+		<li><%= note.note %></li>
+		<li><%= note.contact %></li>
+		<li><%= note.replies %></li>
+		<li><%= note.created_at %></li>
+		<li><%= note.timeout %></li>
+		<li><%= note.updated_at %></li>
+
+		<form action='/reply/add' method='POST'>
+
+			Reply: <textarea name='reply'></textarea>
+			Contact: <textarea name='contact'></textarea>
+			<input type="hidden" value='<%= note._id %>' name="id">
+			<input type="submit" value='reply!'>
+			
+		</form>
+		<hr>
+
+	<% } %><br>
 
 
-	finder <br>
-	<form action='/find_by_location', method='POST'>
+	find by loc<br>
+	<form action='/find_by_location' method='POST'>
 		Lat <input type="text" name="lat"><br>
 		Long <input type="text" name="long"><br>
     Radius <input type="range" name="radius" min="5" value="20" max="50" step="1">
 		<input type="submit" name="find!"><br>
 	</form>
+	<hr>
+
+	find by name<br>
+	<form action='/find_by_name' method='POST'>
+		Name: <input type="text" name="name">
+		<input type="submit" value='find name!'>
+	</form>
+	<hr>
 
 </body>
 </html>
