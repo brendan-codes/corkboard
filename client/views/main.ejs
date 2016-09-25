@@ -3,27 +3,27 @@
   <head>
     <meta charset="utf-8">
     <title>CorkBoard</title>
-
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
-    <!-- Compiled and minified CSS -->
+    <!-- materialize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     <!-- icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <script>
-    $( document ).ready(function() {
-      console.log( "ready!" );
-      $( "#navbar" ).load( "/views/partials/navbar.html" );
-    });
-    </script>
+    <!-- style -->
+    <link rel="stylesheet" href="../css/index.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="../css/navbar.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="../css/main.css" media="screen" title="no title" charset="utf-8">
+    <!-- JS -->
+    <!-- <script type="text/javascript" src="../js/index.js"></script> -->
+    <script type="text/javascript" src="../js/main.js"></script>
   </head>
   <body>
-    <div id='navbar'></div>
-    <!-- body goes below here -->
+    <div class="background">
+      <div id='navbar'></div>
+      <div id='body'></div>
+      <!-- body goes below here -->
 
+    </div>
   </body>
 </html>

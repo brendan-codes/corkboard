@@ -1,0 +1,35 @@
+nav{
+  position: relative;
+  top: -65px;
+  -webkit-animation: slide 1s forwards; /* Chrome, Safari, Opera */
+  animation: slide 1s forwards;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes slide {
+  100%{top: 0px;}
+}
+
+/* Standard syntax */
+@keyframes slide {
+  100%{top: 0px;}
+}
+
+#nw{
+  padding: 0px 15px;
+}
+
+.big-text{
+  font-size: 50px;
+}
+
+.cork-logo{
+  position: relative;
+  top: 5px;
+  height: 50px;
+  padding-right: 10px;
+}
+
+.forest-green {
+  background-color: #6eaa51;
+}
