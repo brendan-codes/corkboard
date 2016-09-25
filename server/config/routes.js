@@ -5,7 +5,7 @@ var Views = require('../controllers/views.js');
 module.exports = function(app){
 
 	// View routing
-  app.get('/main', Views.main);
+  app.get('/', Views.main);
 	app.get('/sandbox', Views.sandbox);
 
 	// Note routing
