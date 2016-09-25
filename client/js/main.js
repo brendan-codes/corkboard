@@ -174,7 +174,7 @@ updateView();
         break;
       case 'view_note':
         $( "#body" ).load( "/views/partials/note.html");
-          $.getScript("../js/map.js");
+          $.getScript("../js/note.js");
           $('#body').transition({opacity: 1});
           $('#body').on('click','#location_button', function(){
             console.log("asdf");
