@@ -72,8 +72,28 @@ updateView();
           $('#search-submit').click(function(){
             // var data = $('.search-form').serialize();
             var data = {'name': $('#search').val()};
-            $.post('/find_by_name', data, function(res){
-              console.log(res);
+            $.post('/find_by_name', data, function(notes){
+              console.log(notes);
+
+              for (var i in notes){
+                console.log(i);
+
+                var post = "";
+                post += "<div class='col s12 m12'><div class='card horizontal'><div class='card-image'>";
+                post += "<img src="+ notes[i].image +" data='image/jpeg' charset='utf-8;base64' class='small_image'>";
+                post += "</div>";
+                post += "<div class='card-stacked'>";
+                post += "<div class='card-content'>";
+                post += "<h2 class='header no-top-margin'>"+ notes[i].name +"</h2>";
+                post += "<p>"+ notes[i].note +"</p>";
+                post += "<p>"+ notes[i].contact +"</p>";
+                post += "</div>";
+                post += "<div class='card-action' id='notes_button' noteId='"+i+"'>";
+                post += "<a>View My Notes</a></div></div></div></div><hr>";
+
+                $('#post-box').append("");
+
+              }
             });
             return false;
           });
