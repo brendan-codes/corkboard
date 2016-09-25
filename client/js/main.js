@@ -104,15 +104,16 @@ $(document).ready(function() {
           });
           $('.submit-make-note').click(function(){
             var data = $('form').serialize();
+              // console.log(data, "data")
             $.ajax({
               url: '/notes/add',
               data: data,
-              contentType: false,
+              // contentType: false,
               type: 'POST',
               processData: false,
               dataType: 'json',
               success: function(res){
-                console.log(res);
+                // console.log(res);
 
               }
             });
@@ -136,6 +137,7 @@ $(document).ready(function() {
       //   break;
       case 'view_note':
         $( "#body" ).load( "/views/partials/note.html");
+          $.getScript("../js/map.js");
         break;
       case 'about':
         $( "#body" ).load( "/views/partials/about.html");
