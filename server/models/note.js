@@ -9,6 +9,7 @@ var NoteSchema = new mongoose.Schema({
 	long: Number,
 	note: String,
 	contact: String,
+	image: String,
 	replies: [{reply: String, contact: String, created_at: {type: Date, default: Date.now}}],
 	timeout: {type: Date, default: Date.now},
 	created_at: {type: Date, default: Date.now},
