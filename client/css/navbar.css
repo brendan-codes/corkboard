@@ -1,8 +1,8 @@
 nav{
   position: relative;
   top: -65px;
-  -webkit-animation: slide 1s forwards; /* Chrome, Safari, Opera */
-  animation: slide 1s forwards;
+  /*-webkit-animation: slide 1s forwards; */
+  /*animation: slide 1s forwards;*/
 }
 
 /* Chrome, Safari, Opera */

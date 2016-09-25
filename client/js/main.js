@@ -30,62 +30,34 @@ $(document).ready(function() {
     switch (view) {
       case 'index':
         $( "#body" ).load( "/views/partials/index.html", function(){
-          $(".nav-list li a").removeClass("active");
-          // $('nav').transit({top: '-65px'});
-          $('#scroll_down').click(function(){
-            window.scrollTo(0, document.body.scrollHeight);
-          });
-          $('#scroll_up').click(function(){
-            window.scrollTo(0, 0);
-          });
+          $.getScript('../js/index.js');
         });
         break;
       case 'search':
         $( "#body" ).load( "/views/partials/search.html", function(){
-          $(".nav-list li a").removeClass("active");
-          $('#search_button').addClass('active');
-          // $('nav').transit({top: '0px'});
+          $.getScript('../js/search.js');
         });
         break;
       case 'make_note':
         $( "#body" ).load( "/views/partials/make_note.html", function(){
-          $(".nav-list li a").removeClass("active");
-          $('#make_note_button').addClass('active');
-          // $('nav').transit({top: '0px'});
+          $.getScript('../js/make_note.js');
         });
         break;
       case 'map':
         $( "#body" ).load( "/views/partials/navbar.html", function(){
-          $(".nav-list li a").removeClass("active");
-          $('#map_button').addClass('active');
-          // $('nav').transit({top: '0px'});
+          $.getScript('../js/map.js');
         });
         break;
       // case 'about':
       //   $( "#body" ).load( "/views/partials/about.html", function(){
-      //     $(".nav-list li a").removeClass("active");
-      //     $('#about_button').addClass('active');
+      //     $.getScript('../js/about.js');
       //   });
       //   break;
       case 'view_note':
         $( "#body" ).load( "/views/partials/note.html");
         break;
-      default:
+      default: break;
     }
   }
 
-
-
-  // $.get('/map', function(res){
-  //   $('#main').html(res);
-  // });
-  // $.get('/findothers', function(res){
-  //   $('#main').html(res);
-  // });
-  // $.get('/findme', function(res){
-  //   $('#main').html(res);
-  // });
-  // $.get('/note', function(res){
-  //   $('#main').html(res);
-  // });
 });
