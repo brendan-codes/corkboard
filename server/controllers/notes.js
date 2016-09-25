@@ -17,7 +17,6 @@ module.exports = (function(){
 
 			},
 			find_by_location: function(req, res){
-				console.log(req)
 				console.log(parseFloat(req.body.lat));
 				console.log("radius", req.body.radius);
 				// res.redirect('/');
