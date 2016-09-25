@@ -25,6 +25,7 @@ $(document).ready(function() {
 
     });
     $('#about_button').on('click', function(){
+      $('#body').css('opacity', 0);
       view = 'about';
       updateView();
     });
@@ -75,7 +76,6 @@ $(document).ready(function() {
             return false;
           });
           $('#notes_button').on('click', function(){
-            console.log('test');
             view = 'view_note';
             updateView();
           });
@@ -104,6 +104,7 @@ $(document).ready(function() {
           });
           $('.submit-make-note').click(function(){
             var data = $('form').serialize();
+              // console.log(data, "data")
             $.ajax({
               url: '/notes/add',
               data: data,
@@ -131,6 +132,16 @@ $(document).ready(function() {
         break;
       case 'view_note':
         $( "#body" ).load( "/views/partials/note.html");
+          $.getScript("../js/map.js");
+          $('#body').on('click','#location_button', function(){
+            console.log("asdf");
+            if ($('#map').hasClass('clear')){
+              $('#location_button').text('Show Picture');
+            } else {
+              $('#location_button').text('Show Location');
+            }
+            $('#map').toggleClass('clear', {duration: 500});
+          });
         break;
       case 'about':
         $( "#body" ).load( "/views/partials/about.html");

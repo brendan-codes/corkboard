@@ -34,3 +34,7 @@ li a {
   -webkit-box-shadow: inset 2px 0 2px #5d9144, inset -2px 0 2px #5d9144;
   box-shadow:         inset 2px 0 2px #5d9144, inset -2px 0 2px #5d9144;
 }
+
+.pointer {
+  cursor: pointer;
+}

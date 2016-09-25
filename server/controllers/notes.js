@@ -7,20 +7,41 @@ var config_geocoder = require('../../config_geocoder.js')
 module.exports = (function(){
 	return {
 			add: function(req, res){
+				var lat;
+				var long;
+				console.log(req.body)
 				var clean_name = req.body.name.trim().toLowerCase();
-				var data_obj = {
+
+				if(req.body.location !== null){
+					console.log(req.body.location)
+					geocoder.geocode(req.body.location, function ( err, data ) {
+						// console.log(data.results[0].geometry.location.lat)
+						// console.log(data.results[0].geometry.location.lng)
+						lat = data.results[0].geometry.location.lat
+						long = data.results[0].geometry.location.lng
+					
+							var data_obj = {
 									name: clean_name,
 									age: req.body.age,
-									address: req.body.address,
-									lat: req.body.lat,
-									long: req.body.long,
+									address: req.body.location,
+									lat: lat,
+									long: long,
 									note: req.body.note,
 									contact: req.body.contact
 								}
-				var new_note = new Note(data_obj);
-				new_note.save(function(err, data){
-					res.json("success");
-				});
+							console.log(data_obj.lat, "data_object.lat")
+							res.json(data_obj.lat, data_obj.long);
+							// Note.find(finder_object, function(err, results){
+
+							// 	console.log(err, "err")
+							// 	console.log(results, "results");
+							// 	res.json(results);
+							// })
+						})
+					}
+				// else{
+			
+
 			},
 			get_by_id: function(req, res){
 				Note.findOne({_id: req.params.id}, function(err, found_note){
