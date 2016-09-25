@@ -11,8 +11,22 @@ module.exports = (function(){
 				var long;
 				console.log(req.body)
 				var clean_name = req.body.name.trim().toLowerCase();
+<<<<<<< HEAD
 				console.log(req.body);
 				if(req.body.location !== ''){
+=======
+
+				// var new_path = req.file.path.split('client/').join('');
+
+				if(req.file){
+					var image_path = req.file.path.split('client/').join('');
+				}else{
+					var image_path = 'imgs/defaultIcon.png';
+				}
+
+				console.log(req.body.location);
+				if(req.body.location !== ''){
+>>>>>>> 47e2ab736983de7b6cf6b81d569d14d66b14dff0
 					console.log(req.body.location)
 					geocoder.geocode(req.body.location, function ( err, data ) {
 						lat = data.results[0].geometry.location.lat
@@ -21,11 +35,12 @@ module.exports = (function(){
 							var data_obj = {
 									name: clean_name,
 									age: req.body.age,
-									address: req.body.location,
+									address: req.body.address,
 									lat: lat,
 									long: long,
 									note: req.body.note,
-									contact: req.body.contact
+									contact: req.body.contact,
+									image: image_path
 								}
 							Note.create(data_obj, function(err, result){
 								console.log(data_obj.lat, "data_object.lat")
@@ -46,6 +61,25 @@ module.exports = (function(){
 							console.log(data_obj.lat, "data_object.lat")
 							res.json(data_obj.lat, data_obj.long);
 						})
+					}else{
+
+						var data_obj = {
+									name: clean_name,
+									age: req.body.age,
+									address: req.body.address,
+									lat: req.body.lat,
+									long: req.body.long,
+									note: req.body.note,
+									contact: req.body.contact,
+									image: image_path
+								}
+
+						Note.create(data_obj, function(err, result){
+							console.log(data_obj.lat, "data_object.lat")
+							res.json(data_obj.lat, data_obj.long);
+						})
+
+
 					}
 			},
 			get_by_id: function(req, res){
