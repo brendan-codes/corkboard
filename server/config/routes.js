@@ -1,14 +1,23 @@
-var Notes = require('/../controller/notes.js')
+var Notes = require('../controllers/notes.js');
+var Views = require('../controllers/views.js');
+
 
 module.exports = function(app){
 
+	// View routing
+  app.get('/main', Views.main);
+	app.get('/sandbox', Views.sandbox);
 
 	// Note routing
-	app.get('/', Notes.index);
-	app.post('/find_by_location', Notes.find_by_location);
+	app.post('/notes/add', function(req, res){
+		Notes.add(req, res);
+	});
+	app.post('/find_by_location', function(req, res){
+		Notes.find_by_location(req, res);
+	});
 
 
 
 
 
-}
+};
