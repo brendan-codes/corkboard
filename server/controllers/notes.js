@@ -1,8 +1,8 @@
-// var Note = require('../models/note.js');
 var mongoose = require('mongoose');
-var Note = mongoose.model('Note');
 var geocoder = require('geocoder');
 var config_geocoder = require('../../config_geocoder.js')
+var Note     = mongoose.model('Note');
+var fs       = require('fs');
 
 module.exports = (function(){
 	return {
@@ -27,6 +27,10 @@ module.exports = (function(){
 									note: req.body.note,
 									contact: req.body.contact
 								}
+							Note.create(data_obj, function(err, result){
+								console.log(data_obj.lat, "data_object.lat")
+								res.json(data_obj.lat, data_obj.long);
+							})
 						})
 					}
 				Note.create(data_obj, function(err, result){
@@ -69,12 +73,36 @@ module.exports = (function(){
 			},
 			all: function(req, res){
 				Note.find({}, function(err, notes){
+					console.log(notes);
 					if(err){
 						res.json(err);
 					}else{
 						res.render('sandbox', {notes: notes});
 					}
 				})
+			},
+			add_image: function(req, res){
+
+				console.log(req.file);
+				console.log(req.body);
+				// res.end();
+
+				var new_path = req.file.path.split('client/').join('');
+
+				Note.update({_id: req.body.id}, {image: new_path}, function(err, results){
+					console.log(results);
+				})
+
+
+
+				// fs.readFile(req.file.path, function(err, data){
+				// 	// console.log(__dirname);
+				// 	var newPath = __dirname + '/../../client/img';
+				// 	console.log(newPath);
+				// 	fs.writeFile(newPath, data, function(err){
+				// 		res.end();
+				// 	})
+				// })
 			},
 			find_by_location: function(req, res){
 				console.log(req.body.search_location, "req")

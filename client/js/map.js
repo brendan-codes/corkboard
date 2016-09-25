@@ -33,7 +33,7 @@ $('.search-submit').click(function(){
         };
 
       //create markers
-        for (i = 0; i < locations.length; i++) {  
+        for (i = 0; i < locations.length; i++) {
           marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i][0], locations[i][1]),
             map: map
@@ -54,9 +54,8 @@ $('.search-submit').click(function(){
             // console.log(res);
       });
     return false;
-    })
+});
 
 $("#recenter").on('click', function (){
     newLocation(37.615223, -122.389977);
 });
-

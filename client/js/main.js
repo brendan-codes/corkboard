@@ -25,6 +25,7 @@ $(document).ready(function() {
 
     });
     $('#about_button').on('click', function(){
+      $('#body').css('opacity', 0);
       view = 'about';
       updateView();
     });
@@ -76,7 +77,6 @@ updateView();
             return false;
           });
           $('#notes_button').on('click', function(){
-            console.log('test');
             view = 'view_note';
             updateView();
           });
@@ -153,6 +153,15 @@ updateView();
       case 'view_note':
         $( "#body" ).load( "/views/partials/note.html");
           $.getScript("../js/map.js");
+          $('#body').on('click','#location_button', function(){
+            console.log("asdf");
+            if ($('#map').hasClass('clear')){
+              $('#location_button').text('Show Picture');
+            } else {
+              $('#location_button').text('Show Location');
+            }
+            $('#map').toggleClass('clear', {duration: 500});
+          });
         break;
       case 'about':
         $( "#body" ).load( "/views/partials/about.html");
