@@ -76,6 +76,7 @@ $(document).ready(function() {
             return false;
           });
           $('#notes_button').on('click', function(){
+            $('#body').css('opacity', 0);
             view = 'view_note';
             updateView();
           });
@@ -133,6 +134,7 @@ $(document).ready(function() {
       case 'view_note':
         $( "#body" ).load( "/views/partials/note.html");
           $.getScript("../js/map.js");
+          $('#body').transition({opacity: 1});
           $('#body').on('click','#location_button', function(){
             console.log("asdf");
             if ($('#map').hasClass('clear')){
@@ -140,7 +142,7 @@ $(document).ready(function() {
             } else {
               $('#location_button').text('Show Location');
             }
-            $('#map').toggleClass('clear', {duration: 500});
+            $('#map').toggleClass('clear', 1000, "swing");
           });
         break;
       case 'about':

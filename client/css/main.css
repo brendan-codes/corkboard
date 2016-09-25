@@ -19,3 +19,13 @@
 .no-top-margin {
   margin-top: 0px !important;
 }
+
+.sub-text{
+  font-size: 15px;
+  color: #6f6f6f;
+}
+
+.search-div {
+  height: 420px;
+  overflow: scroll;
+}
