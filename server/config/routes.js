@@ -7,7 +7,7 @@ module.exports = function(app){
 	// View routing
 
   	app.get('/', Views.main);
-	app.get('/sandbox', Views.sandbox);
+	// app.get('/sandbox', Views.sandbox);
 	
 	// Note routing
 	app.post('/notes/add', function(req, res){
