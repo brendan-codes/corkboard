@@ -1,6 +1,8 @@
 // var Note = require('../models/note.js');
 var mongoose = require('mongoose');
 var Note = mongoose.model('Note');
+var geocoder = require('geocoder');
+var config_geocoder = require('../../config_geocoder.js')
 
 module.exports = (function(){
 	return {
@@ -63,20 +65,31 @@ module.exports = (function(){
 				})
 			},
 			find_by_location: function(req, res){
-				var finder_object = {
+				console.log(req.body.search_location, "req")
+
+		      	geocoder.geocode(req.body.search_location, function ( err, data ) {
+					// console.log("in geocoder", data.results[0].geometry.bounds)
+					console.log(data.results[0].geometry.location.lat)
+					console.log(data.results[0].geometry.location.lng)
+					lat = data.results[0].geometry.location.lat
+					long = data.results[0].geometry.location.lng
+				
+
+					var finder_object = {
 										lat: {
-												$gt: parseFloat(req.body.lat) - 0.1,
-												$lt: parseFloat(req.body.lat) + 0.1
+												$gt: parseFloat(lat) - 0.1,
+												$lt: parseFloat(lat) + 0.1
 											 },
 									    long: {
-									    		$gt: parseFloat(req.body.long) - 0.1,
-									    		$lt: parseFloat(req.body.long) + 0.1
+									    		$gt: parseFloat(long) - 0.1,
+									    		$lt: parseFloat(long) + 0.1
 									   		  }
 									}
-				Note.find(finder_object, function(err, results){
-					console.log(results);
-					res.json(results);
-				})
+					Note.find(finder_object, function(err, results){
+						console.log(results);
+						res.json(results);
+					})	
+				});
 			},
 			find_by_name: function(req, res){
 				if(req.body.name){
