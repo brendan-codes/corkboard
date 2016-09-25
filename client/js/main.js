@@ -1,30 +1,11 @@
 $(document).ready(function() {
   var view = 'index';
-  updateView();
 
   $( "#navbar" ).load( "/views/partials/navbar.html", function(){
-      $(".button-collapse").sideNav();
-      $('#index_button').on('click', function(){
-        view = 'index';
-        updateView();
-      });
-      $('#make_note_button').on('click', function(){
-        view = 'make_note';
-        updateView();
-      });
-      $('#search_button').on('click', function(){
-        view = 'search';
-        updateView();
-      });
-      $('#map_button').on('click', function(){
-        view = 'map';
-        updateView();
-      });
-      // $('#about_button').on('click', function(){
-      //   view = 'about';
-      //   updateView();
-      // });
+    $.getScript('../js/navbar.js');
   });
+
+  updateView();
 
   function updateView(){
     switch (view) {
@@ -45,7 +26,7 @@ $(document).ready(function() {
         break;
       case 'map':
         $( "#body" ).load( "/views/partials/navbar.html", function(){
-          $.getScript('../js/map.js');
+          $.getScript('../js/mapview.js');
         });
         break;
       // case 'about':
