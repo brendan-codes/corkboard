@@ -31,7 +31,8 @@ $(document).ready(function() {
     });
   });
 
-  updateView();
+updateView();
+
   function updateView(){
     switch (view) {
       case 'index':
@@ -84,6 +85,21 @@ $(document).ready(function() {
         break;
       case 'make_note':
         $( "#body" ).load( "/views/partials/make_note.html", function(){
+          var lat;
+          var long;
+          navigator.geolocation.getCurrentPosition(function(location) {
+            console.log(location.coords.latitude);
+            console.log(location.coords.longitude);
+            console.log(location.coords.accuracy);
+            if (location.coords.latitude && location.coords.longitude){
+              console.log('test');
+              lat = location.coords.latitude;
+              long = location.coords.longitude;
+              $('#location').hide();
+              $('.remove-label').hide();
+            }
+          });
+
           $(".nav-list li a").removeClass("selected");
           $('#make_note_button').addClass('selected');
           $('nav').transit({top: '0px'});
@@ -104,8 +120,12 @@ $(document).ready(function() {
             $('#note').attr('placeholder', 'enter a message to your loved one, including further location details or additional details on how to contact you');
           });
           $('.submit-make-note').click(function(){
-            var data = $('form').serialize();
-              // console.log(data, "data")
+            if (!lat && !long){
+              var data = $('form').serialize();
+            } else {
+              var data = $('form').serialize() + '&lat=' + lat + '&long=' + long
+            }
+            console.log("data object", data);
             $.ajax({
               url: '/notes/add',
               data: data,
