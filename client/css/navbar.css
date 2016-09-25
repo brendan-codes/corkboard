@@ -40,7 +40,7 @@ li a {
   -webkit-box-sizing: border-box;
 }
 
-.active {
+.selected {
   background-color: #639949;
   -moz-box-shadow:    inset 2px 0 0 #5d9144;
   -moz-box-shadow:    inset -2px 0 0 #5d9144;
