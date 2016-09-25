@@ -1,40 +1,22 @@
-<script>
-  $(".button-collapse").sideNav();
-</script>
-<style>
-  #nw{
-    padding: 0px 10px;
-  }
-
-  .big-text{
-    font-size: 50px;
-  }
-
-  .cork-logo{
-    position: relative;
-    top: -8px;
-    height: 67px;
-  }
-</style>
 <nav>
-  <div class="nav-wrapper orange" id='nw'>
-    <img src="../imgs/cork.png" class='cork-logo hide-on-med-and-down'/>
-    <a href="/" class="brand-logo"><span class='big-text'>C</span>ORK<span class='big-text'>B</span>OARD</a>
+  <div class="nav-wrapper navbar-fixed-top forest-green" id='nw'>
+    <img src="../imgs/map-location.svg" class='cork-logo hide-on-med-and-down'/>
+    <a class="index_button brand-logo"><span class='big-text'>C</span>ORK<span class='big-text'>B</span>OARD</a>
     <!-- mobile nav button -->
     <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
     <!-- normal nav -->
-    <ul class="right hide-on-med-and-down valign">
-      <li><a href="badges.html">Have you seen me?</a></li>
-      <li><a href="badges.html" class="active">Seeking my family/friends</a></li>
-      <li><a href="map.html">View Nearby</a></li>
-      <li><a href="sass.html">About</a></li>
+    <ul class="nav-list right hide-on-med-and-down valign">
+      <li><a id='make_note_button'>Pin Note</a></li>
+      <li><a id='search_button'>Search</a></li>
+      <li><a id='map_button'>Nearby</a></li>
+      <li><a id='about_button'>About</a></li>
     </ul>
     <!-- mobile nav -->
-    <ul class="side-nav" id="mobile-nav">
-      <li><a href="badges.html">Have you seen me?</a></li>
-      <li><a href="badges.html" class="active">Seeking my family/friends</a></li>
-      <li><a href="map.html">View Nearby</a></li>
-      <li><a href="sass.html">About</a></li>
-      </ul>
+    <ul class="nav-list side-nav" id="mobile-nav">
+      <li><a id='make_note_button'>Pin Note</a></li>
+      <li><a id='search_button'>Search</a></li>
+      <li><a id='map_button'>Nearby</a></li>
+      <li><a id='about_button'>About</a></li>
+    </ul>
   </div>
 </nav>
