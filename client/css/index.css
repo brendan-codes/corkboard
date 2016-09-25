@@ -109,5 +109,13 @@
   background-color: #6eaa51;
 }
 .submit-container {
-  margin-top: 50px;
+  margin-top: 80px;
+}
+.file-path-wrapper {
+  width: 88%;
+  margin-left: 120px;
+}
+.search-btn {
+  position: relative;
+  top: 64px;
 }

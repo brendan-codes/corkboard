@@ -22,11 +22,12 @@ $(document).ready(function() {
       $('#body').css('opacity', 0);
       view = 'map';
       updateView();
+
     });
-    // $('#about_button').on('click', function(){
-    //   view = 'about';
-    //   updateView();
-    // });
+    $('#about_button').on('click', function(){
+      view = 'about';
+      updateView();
+    });
   });
 
   updateView();
@@ -66,6 +67,13 @@ $(document).ready(function() {
           $('#search_button').addClass('selected');
           $('nav').transit({top: '0px'});
           $('#body').transition({opacity: 1});
+          $('#search-submit').click(function(){
+            var data = $('.search-form').serialize();
+            $.post('/find_by_name', data, function(res){
+              console.log(res);
+            });
+            return false;
+          })
         });
         break;
       case 'make_note':
@@ -90,10 +98,19 @@ $(document).ready(function() {
             $('#note').attr('placeholder', 'enter a message to your loved one, including further location details or additional details on how to contact you');
           });
           $('.submit-make-note').click(function(){
-            var details = $('form').serialize();
-            $.post('/notes/add)', details, function(res){
-              console.log(res);
-            })
+            var data = $('form').serialize();
+            $.ajax({
+              url: '/notes/add',
+              data: data,
+              contentType: false,
+              type: 'POST',
+              processData: false,
+              dataType: 'json',
+              success: function(res){
+                console.log(res);
+
+              }
+            });
           });
         });
         break;
@@ -112,6 +129,9 @@ $(document).ready(function() {
       //   break;
       case 'view_note':
         $( "#body" ).load( "/views/partials/note.html");
+        break;
+      case 'about':
+        $( "#body" ).load( "/views/partials/about.html");
         break;
       default: break;
     }
