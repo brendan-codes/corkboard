@@ -70,13 +70,35 @@ updateView();
           $('nav').transit({top: '0px'});
           $('#body').transition({opacity: 1});
           $('#search-submit').click(function(){
-            var data = $('.search-form').serialize();
-            $.post('/find_by_name', data, function(res){
-              console.log(res);
+            // var data = $('.search-form').serialize();
+            var data = {'name': $('#search').val()};
+            $.post('/find_by_name', data, function(notes){
+              console.log(notes);
+
+              for (var i in notes){
+                console.log(i);
+
+                var post = "";
+                post += "<div class='col s12 m12'><div class='card horizontal'><div class='card-image'>";
+                post += "<img src="+ notes[i].image +" data='image/jpeg' charset='utf-8;base64' class='small_image'>";
+                post += "</div>";
+                post += "<div class='card-stacked'>";
+                post += "<div class='card-content'>";
+                post += "<h2 class='header no-top-margin'>"+ notes[i].name +"</h2>";
+                post += "<p>"+ notes[i].note +"</p>";
+                post += "<p>"+ notes[i].contact +"</p>";
+                post += "</div>";
+                post += "<div class='card-action' id='notes_button' noteId='"+i+"'>";
+                post += "<a>View My Notes</a></div></div></div></div><hr>";
+
+                $('#post-box').append("");
+
+              }
             });
             return false;
           });
           $('#notes_button').on('click', function(){
+            $('#body').css('opacity', 0);
             view = 'view_note';
             updateView();
           });
@@ -153,6 +175,7 @@ updateView();
       case 'view_note':
         $( "#body" ).load( "/views/partials/note.html");
           $.getScript("../js/note.js");
+          $('#body').transition({opacity: 1});
           $('#body').on('click','#location_button', function(){
             console.log("asdf");
             if ($('#map').hasClass('clear')){
@@ -160,7 +183,7 @@ updateView();
             } else {
               $('#location_button').text('Show Location');
             }
-            $('#map').toggleClass('clear', {duration: 500});
+            $('#map').toggleClass('clear', 1000, "swing");
           });
         break;
       case 'about':

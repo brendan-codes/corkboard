@@ -1,7 +1,3 @@
-.name {
-  margin-top: 0px;
-}
-
 .map-layer {
   width: 100%;
   height: 100%;
@@ -11,4 +7,17 @@
 
 .clear {
   opacity: 0;
+}
+
+.reply {
+  padding: 10px;
+}
+
+.reply-box {
+  height: 249px;
+  overflow: scroll;
+}
+
+.no-bottom-padding {
+  padding-bottom: 0px !important;
 }
