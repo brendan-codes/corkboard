@@ -1,6 +1,5 @@
 var Notes = require('../controllers/notes.js');
 var Views = require('../controllers/views.js');
-
 var multer   = require('multer');
 var upload = multer({dest: 'client/imgs/'});
 
