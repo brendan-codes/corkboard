@@ -119,3 +119,15 @@
   position: relative;
   top: 64px;
 }
+.map-search-button {
+  positon: relative;
+}
+.map-receptacle {
+  width: 98%;
+  height: 57vh;
+  margin: -30px auto;
+}
+.recenter-btn {
+  margin-top: -140px;
+  margin-left: -50px;
+}

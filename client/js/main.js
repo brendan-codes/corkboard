@@ -113,8 +113,9 @@ $(document).ready(function() {
               processData: false,
               dataType: 'json',
               success: function(res){
-                // console.log(res);
-
+                console.log(res);
+                view = 'view_note';
+                updateView();
               }
             });
           });
@@ -129,18 +130,14 @@ $(document).ready(function() {
           $.getScript("../js/map.js");
         });
         break;
-      // case 'about':
-      //   $( "#body" ).load( "/views/partials/about.html", function(){
-      //     $(".nav-list li a").removeClass("selected");
-      //     $('#about_button').addClass('selected');
-      //   });
-      //   break;
       case 'view_note':
         $( "#body" ).load( "/views/partials/note.html");
           $.getScript("../js/map.js");
         break;
       case 'about':
         $( "#body" ).load( "/views/partials/about.html");
+        $(".nav-list li a").removeClass("selected");
+        $('#about_button').addClass('selected');
         break;
       default: break;
     }
