@@ -5,7 +5,9 @@ var Views = require('../controllers/views.js');
 module.exports = function(app){
 
 	// View routing
-	app.get('/', Views.main);
+	app.get('/', Notes.all);
+
+
 
 	// Note routing
 	app.post('/notes/add', function(req, res){
@@ -13,6 +15,17 @@ module.exports = function(app){
 	});
 	app.post('/find_by_location', function(req, res){
 		Notes.find_by_location(req, res);
+	});
+	app.post('/find_by_name', function(req, res){
+		Notes.find_by_name(req, res);
+	});
+	app.get('/note/:id', function(req, res){
+		Notes.get_by_id(req, res);
+	});
+
+	// Sandbox 
+	app.get('/sandbox', function(req, res){
+		Notes.all(req, res);
 	});
 
 
