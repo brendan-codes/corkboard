@@ -107,13 +107,14 @@ $(document).ready(function() {
             $.ajax({
               url: '/notes/add',
               data: data,
-              contentType: false,
+              // contentType: false,
               type: 'POST',
               processData: false,
               dataType: 'json',
               success: function(res){
                 console.log(res);
-
+                view = 'view_note';
+                updateView();
               }
             });
           });
@@ -128,17 +129,13 @@ $(document).ready(function() {
           $.getScript("../js/map.js");
         });
         break;
-      // case 'about':
-      //   $( "#body" ).load( "/views/partials/about.html", function(){
-      //     $(".nav-list li a").removeClass("selected");
-      //     $('#about_button').addClass('selected');
-      //   });
-      //   break;
       case 'view_note':
         $( "#body" ).load( "/views/partials/note.html");
         break;
       case 'about':
         $( "#body" ).load( "/views/partials/about.html");
+        $(".nav-list li a").removeClass("selected");
+        $('#about_button').addClass('selected');
         break;
       default: break;
     }
