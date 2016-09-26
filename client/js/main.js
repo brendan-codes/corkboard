@@ -1,5 +1,6 @@
 $(document).ready(function() {
   var view = 'index';
+  var notesArr = [];
 
   $( "#navbar" ).load( "/views/partials/navbar.html", function(){
     $(".button-collapse").sideNav();
@@ -33,7 +34,7 @@ $(document).ready(function() {
 
 updateView();
 
-  function updateView(){
+  function updateView(post){
     switch (view) {
       case 'index':
         $( "#body" ).load( "/views/partials/index.html", function(){
@@ -65,6 +66,7 @@ updateView();
         break;
       case 'search':
         $( "#body" ).load( "/views/partials/search.html", function(){
+
           $(".nav-list li a").removeClass("selected");
           $('#search_button').addClass('selected');
           $('nav').transit({top: '0px'});
@@ -73,13 +75,11 @@ updateView();
             // var data = $('.search-form').serialize();
             var data = {'name': $('#search').val()};
             $.post('/find_by_name', data, function(notes){
-              console.log(notes);
+              notesArr = notes;
 
               for (var i in notes){
-                console.log(i);
-
                 var post = "";
-                post += "<div class='col s12 m12'><div class='card horizontal'><div class='card-image'>";
+                post += "<div class='col s12 m12'><div class='card horizontal'><div class='card-image fill'>";
                 post += "<img src="+ notes[i].image +" data='image/jpeg' charset='utf-8;base64' class='small_image'>";
                 post += "</div>";
                 post += "<div class='card-stacked'>";
@@ -88,20 +88,25 @@ updateView();
                 post += "<p>"+ notes[i].note +"</p>";
                 post += "<p>"+ notes[i].contact +"</p>";
                 post += "</div>";
-                post += "<div class='card-action' id='notes_button' noteId='"+i+"'>";
+                post += "<div class='card-action notes_button' noteId='"+i+"'>";
                 post += "<a>View My Notes</a></div></div></div></div><hr>";
 
                 $('#post-box').append(post);
-
               }
             });
             return false;
           });
-          $('#notes_button').on('click', function(){
-            $('#body').css('opacity', 0);
-            view = 'view_note';
-            updateView();
+          $('#body').on('click', '.notes_button',function(){
+              $('#body').css('opacity', 0);
+              noteId = $(this).attr('noteId');
+              view = 'view_note';
+              updateView(notesArr[noteId]);
           });
+          // $('#notes_button').on('click', function(){
+          //   $('#body').css('opacity', 0);
+          //   view = 'view_note';
+          //   updateView();
+          // });
         });
         break;
       case 'make_note':
@@ -173,9 +178,19 @@ updateView();
         });
         break;
       case 'view_note':
-        $( "#body" ).load( "/views/partials/note.html");
+        $( "#body" ).load( "/views/partials/note.html", function(){
+
           $.getScript("../js/note.js");
           $('#body').transition({opacity: 1});
+
+          console.log(post.image);
+
+          $('#image').attr('src', post.image)
+          $('#name').text(post.name)
+          $('#note').text(post.note)
+          $('#contact').text(post.contact)
+
+
           $('#body').on('click','#location_button', function(){
             console.log("asdf");
             if ($('#map').hasClass('clear')){
@@ -185,6 +200,7 @@ updateView();
             }
             $('#map').toggleClass('clear', 1000, "swing");
           });
+        });
         break;
       case 'about':
         $( "#body" ).load( "/views/partials/about.html");
