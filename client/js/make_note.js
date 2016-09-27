@@ -1,7 +1,7 @@
 //==========================================================
 //                        LOCATION
 //==========================================================
-var lat, long;
+var lat, long, geolocation;
 navigator.geolocation.getCurrentPosition(function(location) {
   // console.log(location.coords.latitude);
   // console.log(location.coords.longitude);
@@ -16,14 +16,10 @@ navigator.geolocation.getCurrentPosition(function(location) {
     geocoder.geocode({'location': latlng}, function(results, status) {
       if (status === 'OK') {
         if (results) {
-          $('#location').val(results[0].formatted_address);
-          $("#location").removeAttr('disabled');
-          $('#location').change();
-          // use on validation
-          $('#location').removeClass('invalid').addClass('valid');
-          $('#location-label').removeAttr('data-success');
-          $('#loading').remove();
-          $('#location-label').css('margin-left', 130);
+          geolocation = results[0].formatted_address;
+          $('#location').val(geolocation);
+          $('#location').removeClass('invalid').addClass('valid').removeAttr('disabled').change();
+          enableLocationInput();
         } else {
           window.alert('No loction found');
         }
@@ -36,12 +32,14 @@ navigator.geolocation.getCurrentPosition(function(location) {
     // $('#location').hide();
     // $('.remove-label').hide();
   }
-}, function(){
-  $("#location").removeAttr('disabled');
-  $('#loading').remove();
-  $('#location-label').css('margin-left', 130);
-});
+}, function(){ enableLocationInput(); });
 
+function enableLocationInput(){
+  $("#location").removeAttr('disabled');
+  $('#loading').attr('src', 'imgs/geolocation.png');
+  $('#loading').removeAttr('onmouseover').removeAttr('onmouseout');
+  // $('#location-label').css('margin-left', 130);
+}
 //==========================================================
 //                        AUTO COMPLETE
 //==========================================================
@@ -84,6 +82,16 @@ $('#file-path').click(function(){
   $('#file-path').blur();
   $('#file-upload').click();
 });
+
+// loading
+$('#loading').on('click', function(){
+  if ($(this).attr('src') == 'imgs/geolocation.png'){
+    $('#location').val(geolocation).removeClass('invalid').addClass('valid')
+  } else {
+    enableLocationInput();
+  }
+});
+
 
 
 //==========================================================

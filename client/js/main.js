@@ -42,6 +42,36 @@ $(document).ready(function() {
         });
         break;
 
+        //########################   MAKE NOTE   #################################
+        case 'make_note':
+        $( "#body" ).load( "/views/partials/make_note.html", function(){
+          $('#body').transition({opacity: 1});
+          $.getScript("../js/make_note.js");
+
+          // submit note
+          $('.submit-make-note').click(function(){
+            if (validateNote()){
+              var data = $('form').serialize();
+              $.ajax({
+                url: '/notes/add',
+                data: data,
+                // contentType: false,
+                type: 'POST',
+                processData: false,
+                dataType: 'json',
+                success: function(note){
+                  if (note){ loadView('view_note', note); }
+                  else { swal({   title: "Server Error",   text: "Sorry there has been a proble",   type: "error",   confirmButtonText: "OK" }); }
+                }
+              });
+            } else {
+              swal({   title: "Input Error",   text: "Please fill out all fields marked with a *",   type: "error",   confirmButtonText: "OK" });
+            }
+          });
+
+        });
+        break;
+
       //########################   SEARCH   ####################################
       case 'search':
         $( "#body" ).load( "/views/partials/search.html", function(){
@@ -51,18 +81,16 @@ $(document).ready(function() {
           $("#search").keypress(function(event) {
             if (event.which == 13) {
               event.preventDefault();
-              $('#search-submit').click();
               $("#search").blur();
+              $('#search-submit').click();
             }
           });
 
+          // search validation
           $('#search').on('input', function(){
-            if ($(this).val()){
-              $('#search').removeClass('invalid').addClass('valid');
-            } else {
-              $('#search').removeClass('valid').addClass('invalid');
-            }
-          })
+            if ($(this).val()){ $('#search').removeClass('invalid').addClass('valid'); }
+            else { $('#search').removeClass('valid').addClass('invalid'); }
+          });
 
           // search
           $('#search-submit').click(function(){
@@ -107,36 +135,6 @@ $(document).ready(function() {
               console.log(noteId);
               loadView('view_note', notesArr[noteId]);
           });
-        });
-        break;
-
-      //########################   MAKE NOTE   #################################
-      case 'make_note':
-        $( "#body" ).load( "/views/partials/make_note.html", function(){
-          $('#body').transition({opacity: 1});
-          $.getScript("../js/make_note.js");
-
-          // submit note
-          $('.submit-make-note').click(function(){
-            if (validateNote()){
-              var data = $('form').serialize();
-              $.ajax({
-                url: '/notes/add',
-                data: data,
-                // contentType: false,
-                type: 'POST',
-                processData: false,
-                dataType: 'json',
-                success: function(note){
-                  if (note){ loadView('view_note', note); }
-                  else { swal({   title: "Server Error",   text: "Sorry there has been a proble",   type: "error",   confirmButtonText: "OK" }); }
-                }
-              });
-            } else {
-              swal({   title: "Input Error",   text: "Please fill out all fields marked with a *",   type: "error",   confirmButtonText: "OK" });
-            }
-          });
-
         });
         break;
 
