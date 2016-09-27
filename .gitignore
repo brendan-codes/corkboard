@@ -1,3 +1,4 @@
 node_modules/
+client/bower/
 config_geocoder.js
 .DS_Store

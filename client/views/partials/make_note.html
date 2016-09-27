@@ -3,43 +3,45 @@
     <div class="card-panel white">
       <div class="row">
         <form class="col s12 make-note">
-          <div class="row">
+          <div class="row no-bottom-margin">
             <div class="input-field col s6">
-              <input id="name" type="text" name="name">
-              <label for="name" data-error="wrong" data-success="right">Name:</label>
+              <input id="name" type="text" name="name" required>
+              <label for="name">Name *</label>
             </div>
             <div class="input-field col s6">
-              <input id="age" type="text" name="age">
-              <label for="age">Age:</label>
+              <input id="age" type="number" name="age">
+              <label for="age">Age</label>
             </div>
           </div>
-          <div class="row" id="remove-for-coords">
+          <div class="row no-bottom-margin" id="remove-for-coords">
             <div class="input-field col s12">
-              <input id="location" type="text" name="location">
-              <label for="location" data-error="wrong" data-success="right" class="remove-label">Location:</label>
+              <input id="location" type="text" name="location" disabled="disabled">
+              <label id="location-label" for="location" class="remove-label">Location *</label>
             </div>
             <div class="input-field col s12">
               <input id="contact" type="text" name="contact">
-              <label for="contact" data-error="wrong" data-success="right">Contact:</label>
+              <label for="contact">Contact *</label>
             </div>
           </div>
-          <div class="row">
+          <div class="row no-bottom-margin">
             <div class="input-field col s12">
               <textarea id="note" class="materialize-textarea" name="note"></textarea>
-              <label for="note">Note:</label>
+              <label for="note">Note *</label>
             </div>
           </div>
-          <div class="file-field input-field">
-            <div class="btn">
-              <span>File</span>
-              <input type="file" name="avatar">
+          <div class="row no-bottom-margin">
+            <div class="file-field input-field col s6">
+              <div class="btn">
+                <span>File</span>
+                <input id='file-upload' type="file" name="avatar" accept=".png,.jpg,.jpeg,.tif,.gif ">
+              </div>
+              <div class="file-path-wrapper">
+                <input id='file-path' class="file-path validate" type="text" placeholder="File">
+              </div>
             </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
+            <div class="input-field col s6 submit-container right-align">
+              <input type="button" value="submit" class="btn submit-make-note">
             </div>
-          </div>
-          <div class="input-field col s12 submit-container">
-            <input type="button" value="submit" class="btn submit-make-note">
           </div>
         </form>
       </div>
