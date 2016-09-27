@@ -171,7 +171,7 @@ module.exports = (function(){
 			find_by_name: function(req, res){
 				if(req.body.name){
 					var clean_name = req.body.name.trim().toLowerCase()
-					Note.find({name: clean_name}, function(err, results){
+					Note.find({name: {'$regex': clean_name}}, function(err, results){
 						res.json(results);
 					})
 				}else{
