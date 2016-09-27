@@ -1,217 +1,125 @@
 $(document).ready(function() {
-  var view = 'index';
   var notesArr = [];
 
+  // load navbar
   $( "#navbar" ).load( "/views/partials/navbar.html", function(){
     $(".button-collapse").sideNav();
-    $('#index_button').on('click', function(){
-      $('#body').css('opacity', 0);
-      view = 'index';
-      updateView();
-    });
-    $('#make_note_button').on('click', function(){
-      $('#body').css('opacity', 0);
-      view = 'make_note';
-      updateView();
-    });
-    $('#search_button').on('click', function(){
-      $('#body').css('opacity', 0);
-      view = 'search';
-      updateView();
-    });
-    $('#map_button').on('click', function(){
-      $('#body').css('opacity', 0);
-      view = 'map';
-      updateView();
-
-    });
-    $('#about_button').on('click', function(){
-      $('#body').css('opacity', 0);
-      view = 'about';
-      updateView();
-    });
+    $('#index_button').on('click',     function(){ loadView('index'); }     );
+    $('#make_note_button').on('click', function(){ loadView('make_note'); } );
+    $('#search_button').on('click',    function(){ loadView('search') ;}    );
+    $('#map_button').on('click',       function(){ loadView('map'); }       );
+    $('#about_button').on('click',     function(){ loadView('about'); }     );
   });
 
-updateView();
+  // load index
+  loadView('index');
 
-  function updateView(post){
+  // routing function
+  function loadView(view, post){
+    // for transition
+    $('#body').css('opacity', 0);
+    // set nav for view
+    activateView(view);
+    // load correct view
     switch (view) {
+      //########################   INDEX   #####################################
       case 'index':
         $( "#body" ).load( "/views/partials/index.html", function(){
-          $(".nav-list li a").removeClass("active");
-          $('nav').transit({top: '-65px'});
           $('#body').transition({opacity: 1});
 
+          // scroling
           $('#scroll_down').click(function(){
             window.scrollTo(0, document.body.scrollHeight);
           });
           $('#scroll_up').click(function(){
             window.scrollTo(0, 0);
           });
-          $('#body').on('click', '#make_note_button', function(){
-            $('#body').css('opacity', 0);
-            view = 'make_note';
-            updateView();
-          });
-          $('#body').on('click', '#search_button', function(){
-            $('#body').css('opacity', 0);
-            view = 'search';
-            updateView();
-          });
-          $('#body').on('click', '#map_button', function(){
-            $('#body').css('opacity', 0);
-            view = 'map';
-            updateView();
-          });
+
+          // navigation
+          $('#body').on('click', '#make_note_button',   function(){ loadView('make_note'); });
+          $('#body').on('click', '#search_button',      function(){ loadView('search');    });
+          $('#body').on('click', '#map_button',         function(){ loadView('map');       });
         });
         break;
+
+      //########################   SEARCH   ####################################
       case 'search':
         $( "#body" ).load( "/views/partials/search.html", function(){
-          $(".nav-list li a").removeClass("selected");
-          $('#search_button').addClass('selected');
-          $('nav').transit({top: '0px'});
           $('#body').transition({opacity: 1});
+
+          // search on enter
+          $("#search").keypress(function(event) {
+            if (event.which == 13) {
+              event.preventDefault();
+              $('#search-submit').click();
+              $("#search").blur();
+            }
+          });
+
+          $('#search').on('input', function(){
+            if ($(this).val()){
+              $('#search').removeClass('invalid').addClass('valid');
+            } else {
+              $('#search').removeClass('valid').addClass('invalid');
+            }
+          })
 
           // search
           $('#search-submit').click(function(){
-            // var data = $('.search-form').serialize();
-            var data = {'name': $('#search').val()};
-            $.post('/find_by_name', data, function(notes){
-              notesArr = notes;
+            var name = $('#search').val();
+            if (name){
+              $('#search').removeClass('invalid').addClass('valid');
+              var data = {'name': name};
+              $.post('/find_by_name', data, function(notes){
+                notesArr = notes;
 
-              for (var i in notes){
-                var post = "";
-                post += "<div class='col s12 m12'><div class='card horizontal'><div class='card-image fill'>";
-                post += "<img src="+ notes[i].image +" data='image/jpeg' charset='utf-8;base64' class='small_image'>";
-                post += "</div><div class='card-stacked'><div class='card-content'>";
-                post += "<h2 class='header no-top-margin'>"+ notes[i].name +"</h2>";
-                post += "<p>"+ notes[i].note +"</p>";
-                post += "<p>"+ notes[i].contact +"</p>";
-                post += "</div>";
-                post += "<div class='card-action notes_button' noteId='"+i+"'>";
-                post += "<a>View My Notes</a></div></div></div></div><hr>";
+                $('#post-box').empty();
+                $('#search-label').attr('data-success', notes.length+' results found');
+                if (notes){ $('#post-box').removeClass('clear'); }
+                else { ('#post-box').addClass('clear'); }
 
-                $('#post-box').append(post);
-              }
-            });
-            return false;
-          });
-          $('#body').on('click', '.notes_button',function(){
-              $('#body').css('opacity', 0);
-              noteId = $(this).attr('noteId');
-              view = 'view_note';
-              updateView(notesArr[noteId]);
-          });
-          // $('#notes_button').on('click', function(){
-          //   $('#body').css('opacity', 0);
-          //   view = 'view_note';
-          //   updateView();
-          // });
-        });
-        break;
-      case 'make_note':
-        $( "#body" ).load( "/views/partials/make_note.html", function(){
-          $(".nav-list li a").removeClass("selected");
-          $('#make_note_button').addClass('selected');
-          $('nav').transit({top: '0px'});
-          $('#body').transition({opacity: 1});
+                for (var i in notes){
+                  var post = "";
+                  post += "<div class='col s12 m12'><div class='card horizontal'><div class='card-image fill'>";
+                  post += "<img src="+ notes[i].image +" data='image/jpeg' charset='utf-8;base64' class='small_image'>";
+                  post += "</div><div class='card-stacked'><div class='card-content'>";
+                  post += "<h2 class='header no-top-margin'>"+ notes[i].name +"</h2>";
+                  post += "<p>"+ notes[i].note +"</p>";
+                  post += "<p>"+ notes[i].contact +"</p>";
+                  post += "</div>";
+                  post += "<div class='card-action notes_button' noteId='"+i+"'>";
+                  post += "<a>View My Notes</a></div></div></div></div><hr>";
 
-          //==========================================================
-          //                        LOCATION
-          //==========================================================
-          var lat, long;
-          navigator.geolocation.getCurrentPosition(function(location) {
-            // console.log(location.coords.latitude);
-            // console.log(location.coords.longitude);
-            // console.log(location.coords.accuracy);
-            if (location.coords.latitude && location.coords.longitude){
-              lat = location.coords.latitude;
-              long = location.coords.longitude;
-
-              // address lookup
-              var geocoder = new google.maps.Geocoder();
-              var latlng = {lat: parseFloat(lat), lng: parseFloat(long)};
-              geocoder.geocode({'location': latlng}, function(results, status) {
-                if (status === 'OK') {
-                  if (results) {
-                    $('#location').val(results[0].formatted_address);
-                    $("#location").removeAttr('disabled');
-                    $('#location').change();
-                    // use on validation
-                    $('#location').removeClass('invalid').addClass('valid');
-                    $('#location-label').removeAttr('data-success');
-                  } else {
-                    window.alert('No loction found');
-                  }
-                } else {
-                  window.alert('Geocoder failed due to: ' + status);
+                  $('#post-box').append(post);
                 }
               });
-              // end - address lookup
-
-              // $('#location').hide();
-              // $('.remove-label').hide();
-            }
-          }, function(){
-            $("#location").removeAttr('disabled');
-          });
-
-          //==========================================================
-          //                        AUTO COMPLETE
-          //==========================================================
-          var input = document.getElementById('location');
-          var autocomplete = new google.maps.places.Autocomplete(input);
-          $('#location').attr('placeholder', '');
-
-          autocomplete.addListener('place_changed', function() {
-            var place = autocomplete.getPlace();
-            if (!place.geometry) {
-              console.log("Error: Autocomplete's returned place contains no geometry");
-              return;
             } else {
-              $('#location').addClass('valid');
-              lat = place.geometry.location.lat();
-              long = place.geometry.location.lng();
-              console.log(lat, long);
+              console.log('ya');
+              $('#search').removeClass('valid').addClass('invalid')
             }
+            return false;
           });
 
-          //==========================================================
-          //                        FORM CLICK
-          //==========================================================
-          $('#name').click(function(){
-            $('#name').attr('placeholder', 'your name or the name of the person you are looking for');
+          // view note
+          $('#body').on('click', '.notes_button', function(){
+              $('#body').css('opacity', 0);
+              noteId = $(this).attr('noteId');
+              console.log(noteId);
+              loadView('view_note', notesArr[noteId]);
           });
-          $('#age').click(function(){
-            $('#age').attr('placeholder', 'your age or the age of the person you are looking for');
-          });
-          $('#location').click(function(){
-            $('#location').attr('placeholder', 'enter your location');
-          });
-          $('#contact').click(function(){
-            $('#contact').attr('placeholder', 'list as many means of contact as you wish');
-          });
-          $('#note').click(function(){
-            $('#note').attr('placeholder', 'enter a message to your loved one, including further location details or additional details on how to contact you');
-          });
-          $('#file-path').click(function(){
-            $('#file-path').blur();
-            $('#file-upload').click();
-          });
+        });
+        break;
 
-          //==========================================================
-          //                        SUBMIT
-          //==========================================================
+      //########################   MAKE NOTE   #################################
+      case 'make_note':
+        $( "#body" ).load( "/views/partials/make_note.html", function(){
+          $('#body').transition({opacity: 1});
+          $.getScript("../js/make_note.js");
+
+          // submit note
           $('.submit-make-note').click(function(){
             if (validateNote()){
               var data = $('form').serialize();
-              console.log(data);
-              // if (!lat && !long){
-              //   var data = $('form').serialize();
-              // } else {
-              //   var data = $('form').serialize() + '&lat=' + lat + '&long=' + long;
-              // }
-              console.log("data object", data);
               $.ajax({
                 url: '/notes/add',
                 data: data,
@@ -220,83 +128,75 @@ updateView();
                 processData: false,
                 dataType: 'json',
                 success: function(note){
-                  console.log(note);
-                  view = 'view_note';
-                  if (note){
-                    updateView(note);
-                  } else {
-                    swal({   title: "Server Error",   text: "Sorry there has been a proble",   type: "error",   confirmButtonText: "OK" });
-                  }
+                  if (note){ loadView('view_note', note); }
+                  else { swal({   title: "Server Error",   text: "Sorry there has been a proble",   type: "error",   confirmButtonText: "OK" }); }
                 }
               });
             } else {
               swal({   title: "Input Error",   text: "Please fill out all fields marked with a *",   type: "error",   confirmButtonText: "OK" });
-              console.log('bad');
             }
           });
 
-          //==========================================================
-          //                        VALIDATION
-          //==========================================================
-          function isValid(element){
-            var name = $(element).val();
-            if (name){ $(element).removeClass('invalid').addClass('valid'); }
-            else { $(element).removeClass('valid').addClass('invalid'); }
-          }
-
-          function validateNote(){
-            var name = isValid($('#name'));
-            var contact = isValid($('#contact'));
-            var location = isValid($('#location'));
-            var note = isValid($('#note'));
-            return name && contact && location && note;
-          }
-
-          $('#name').on('input', function(){ isValid($(this)); });
-          $('#contact').on('input', function(){ isValid($(this)); });
-          $('#location').on('input', function(){ isValid($(this)); });
-          $('#note').on('input', function(){ isValid($(this)); });
-
         });
         break;
+
+      //###########################   MAP   ####################################
       case 'map':
         $( "#body" ).load( "/views/partials/map.html", function(){
-          $(".nav-list li a").removeClass("selected");
-          $('#map_button').addClass('selected');
-          $('nav').transit({top: '0px'});
           $('#body').transition({opacity: 1});
           $.getScript("../js/map.js");
         });
         break;
+
+      //########################   VIEW NOTE   #################################
       case 'view_note':
         $( "#body" ).load( "/views/partials/note.html", function(){
-
-          $.getScript("../js/note.js");
           $('#body').transition({opacity: 1});
+          $.getScript("../js/note.js");
 
-          $('#image').attr('src', post.image)
-          $('#name').text(post.name)
-          $('#note').text(post.note)
-          $('#contact').text(post.contact)
+          //==========================================================
+          //                    SET NOTE DATA
+          //==========================================================
+          $('#image').attr('src', post.image);
+          $('#name').text(post.name);
+          $('#note').text(post.note);
+          $('#contact').text(post.contact);
 
 
+          //==========================================================
+          //                        MAP
+          //==========================================================
           $('#body').on('click','#location_button', function(){
-            console.log("asdf");
+            $('#map').toggleClass('clear', 1000, "swing");
             if ($('#map').hasClass('clear')){
               $('#location_button').text('Show Picture');
             } else {
               $('#location_button').text('Show Location');
             }
-            $('#map').toggleClass('clear', 1000, "swing");
           });
+
         });
         break;
+
+      //########################   ABOUT   ####################################
       case 'about':
-        $( "#body" ).load( "/views/partials/about.html");
-        $(".nav-list li a").removeClass("selected");
-        $('#about_button').addClass('selected');
+        $( "#body" ).load( "/views/partials/about.html", function(){
+          $('#body').transition({opacity: 1});
+        });
         break;
+
       default: break;
+    }
+  }
+
+  // sets the nav for view
+  function activateView(view){
+    $(".nav-list li a").removeClass("selected");
+    if (view == 'index'){
+      $('nav').transit({top: '-65px'});
+    } else {
+      $('nav').transit({top: '0px'});
+      $('#'+view+'_button').addClass('selected');
     }
   }
 

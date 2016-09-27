@@ -1,4 +1,6 @@
-//create map
+//==========================================================
+//                     CREATE MAP
+//==========================================================
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 10,
     center: new google.maps.LatLng(37.615223, -122.389977),
@@ -22,19 +24,19 @@
 
 
         var locations = [];
-        var newcenter; 
+        var newcenter;
 
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(37.615223, -122.389977),
             map: map
           });
-        
+
       //create markers
         // for (i = 0; i < locations.length; i++) {
           // marker = new google.maps.Marker({
           //   position: new google.maps.LatLng(locations[i][0], locations[i][1]),
           //   map: map
-          
+
         // }
 
         //event listener for infowindow

@@ -5,8 +5,8 @@
         <form class="col s12" id="search-form">
           <div class="row">
             <div class="input-field col s10">
-              <input id="search" type="text" class="validate" name="name">
-              <label for="search" data-error="wrong" data-success="right">Search:</label>
+              <input id="search" type="text" class="validate" name="name" required>
+              <label id="search-label" for="search" data-error="Required">Search by Name:</label>
             </div>
             <div class="input-field col s2 search-btn">
               <button class="btn" id="search-submit" type="button">Submit</button>
@@ -21,5 +21,5 @@
 
 <div class="search-div row no-bottom-margin">
   <div class="col s12 m12">
-    <div class="col s12 white main no-top-margin no-bottom-margin" id='post-box'></div>
+    <div class="col s12 white main no-top-margin no-bottom-margin clear" id='post-box'></div>
   </div>

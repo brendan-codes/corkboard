@@ -30,6 +30,11 @@
   overflow: scroll;
 }
 
+.clear {
+  opacity: 0;
+  -webkit-transition: all 0.5s ease-in-out;
+}
+
 .fill {
     display: flex;
     justify-content: center;
@@ -40,4 +45,24 @@
     flex-shrink: 0;
     min-width: 100%;
     min-height: 100%
+}
+
+#location-label{
+  margin-left: 175px;
+}
+
+.loading-gif{
+  position: relative;
+  top: 10px;
+  width: 25px;
+  height: 25px;
+}
+
+.submit-make-note, #search-submit{
+  position: relative;
+  right: 0px;
+}
+
+.right{
+  margin-right: 20px;
 }

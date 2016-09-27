@@ -14,9 +14,15 @@
             </div>
           </div>
           <div class="row no-bottom-margin" id="remove-for-coords">
-            <div class="input-field col s12">
-              <input id="location" type="text" name="location" disabled="disabled">
-              <label id="location-label" for="location" class="remove-label">Location *</label>
+            <div class="file-field input-field col s12">
+              <div class="btn">
+                <span>Pin</span>
+              </div>
+              <div class="file-path-wrapper">
+                <i class="material-icons prefix" id='loading'><img src="imgs/loader.gif" class='loading-gif'/></i>
+                <label id="location-label" for="location" class="remove-label">Location *</label>
+                <input id="location" type="text" name="location" disabled="disabled" placeholder="Lonation *">
+              </div>
             </div>
             <div class="input-field col s12">
               <input id="contact" type="text" name="contact">
@@ -39,8 +45,8 @@
                 <input id='file-path' class="file-path validate" type="text" placeholder="File">
               </div>
             </div>
-            <div class="input-field col s6 submit-container right-align">
-              <input type="button" value="submit" class="btn submit-make-note">
+            <div class="input-field col s6 submit-container">
+              <input type="button" value="submit" class="btn right submit-make-note">
             </div>
           </div>
         </form>
