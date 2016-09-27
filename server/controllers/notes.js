@@ -54,9 +54,11 @@ module.exports = (function(){
 									image: image_path
 								}
 
-						Note.create(data_obj, function(err, result){
+						var new_note = new Note(data_obj);
+
+						new_note.save(function(err, result){
 							console.log(data_obj.lat, "data_object.lat")
-							res.json(data_obj.lat, data_obj.long);
+							res.json(new_note);
 						})
 
 
