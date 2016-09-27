@@ -54,9 +54,11 @@ module.exports = (function(){
 									image: image_path
 								}
 
-						Note.create(data_obj, function(err, result){
+						var new_note = new Note(data_obj);
+
+						new_note.save(function(err, result){
 							console.log(data_obj.lat, "data_object.lat")
-							res.json(data_obj.lat, data_obj.long);
+							res.json(new_note);
 						})
 
 
@@ -169,7 +171,7 @@ module.exports = (function(){
 			find_by_name: function(req, res){
 				if(req.body.name){
 					var clean_name = req.body.name.trim().toLowerCase()
-					Note.find({name: clean_name}, function(err, results){
+					Note.find({name: {'$regex': clean_name}}, function(err, results){
 						res.json(results);
 					})
 				}else{
