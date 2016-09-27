@@ -22,18 +22,14 @@ $(document).ready(function() {
     activateView(view);
     // load correct view
     switch (view) {
-      //########################   INDEX   #####################################
+      //###########################   INDEX   ##################################
       case 'index':
         $( "#body" ).load( "/views/partials/index.html", function(){
           $('#body').transition({opacity: 1});
 
           // scroling
-          $('#scroll_down').click(function(){
-            window.scrollTo(0, document.body.scrollHeight);
-          });
-          $('#scroll_up').click(function(){
-            window.scrollTo(0, 0);
-          });
+          $('#scroll_down').click(function(){ window.scrollTo(0, document.body.scrollHeight); });
+          $('#scroll_up').click(function(){ window.scrollTo(0, 0); });
 
           // navigation
           $('#body').on('click', '#make_note_button',   function(){ loadView('make_note'); });
@@ -42,7 +38,7 @@ $(document).ready(function() {
         });
         break;
 
-        //########################   MAKE NOTE   #################################
+        //########################   MAKE NOTE   ###############################
         case 'make_note':
         $( "#body" ).load( "/views/partials/make_note.html", function(){
           $('#body').transition({opacity: 1});
@@ -65,7 +61,7 @@ $(document).ready(function() {
                 }
               });
             } else {
-              swal({   title: "Input Error",   text: "Please fill out all fields marked with a *",   type: "error",   confirmButtonText: "OK" });
+              // swal({   title: "Input Error",   text: "Please fill out all fields marked with a *",   type: "error",   confirmButtonText: "OK" });
             }
           });
 
@@ -122,8 +118,7 @@ $(document).ready(function() {
                 }
               });
             } else {
-              console.log('ya');
-              $('#search').removeClass('valid').addClass('invalid')
+              $('#search').removeClass('valid').addClass('invalid');
             }
             return false;
           });

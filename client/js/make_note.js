@@ -56,7 +56,7 @@ autocomplete.addListener('place_changed', function() {
     $('#location').addClass('valid');
     lat = place.geometry.location.lat();
     long = place.geometry.location.lng();
-    console.log(lat, long);
+    // console.log(lat, long);
   }
 });
 
@@ -86,7 +86,7 @@ $('#file-path').click(function(){
 // loading
 $('#loading').on('click', function(){
   if ($(this).attr('src') == 'imgs/geolocation.png'){
-    $('#location').val(geolocation).removeClass('invalid').addClass('valid')
+    $('#location').val(geolocation).removeClass('invalid').addClass('valid');
   } else {
     enableLocationInput();
   }

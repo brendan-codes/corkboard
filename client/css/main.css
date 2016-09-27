@@ -58,7 +58,7 @@
   height: 25px;
 }
 
-.submit-make-note, #search-submit{
+.submit-make-note {
   position: relative;
   right: 0px;
 }

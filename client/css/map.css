@@ -1,7 +1,12 @@
 #recenter {
-	position: relative;
-	top: 395px;
-	left: 70px;
+  position: relative;
+  top: 32px;
+  left: 130px;
+  height: 32px;
+  box-shadow: 0;
+  /* bottom: 0px; */
+  margin-left: 0px;
+  margin-top: 0px;
 	z-index: 30;
 }
 #search{
