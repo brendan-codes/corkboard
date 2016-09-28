@@ -27,38 +27,16 @@ module.exports = (function(){
 					var image_path = 'imgs/defaultIcon.png';
 				}
 
-				if(req.body.location !== ''){
-
-					geocoder.geocode(req.body.location, function ( err, data ) {
-						lat = data.results[0].geometry.location.lat
-						long = data.results[0].geometry.location.lng
-
-						var data_obj = {
-											name: clean_name,
-											age: req.body.age,
-											address: req.body.address,
-											lat: lat,
-											long: long,
-											note: req.body.note,
-											contact: req.body.contact,
-											image: image_path
-										};
-
-						var new_note = new Note(data_obj);
-
-						new_note.save(function(err, result){
-							res.json(new_note);
-						})
-					})
-
-				} else {
+				geocoder.geocode(req.body.location, function ( err, data ) {
+					lat = data.results[0].geometry.location.lat
+					long = data.results[0].geometry.location.lng
 
 					var data_obj = {
 										name: clean_name,
 										age: req.body.age,
 										address: req.body.address,
-										lat: req.body.lat,
-										long: req.body.long,
+										lat: lat,
+										long: long,
 										note: req.body.note,
 										contact: req.body.contact,
 										image: image_path
@@ -68,8 +46,8 @@ module.exports = (function(){
 
 					new_note.save(function(err, result){
 						res.json(new_note);
-					});
-				}
+					})
+				})
 			},
 			// ----------------------------------------- ///
 			// ----------------- GET BY ID ------------- ///
